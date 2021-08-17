@@ -1,7 +1,7 @@
 <template>
     <p style="background:none;height: 5%;position: fixed;bottom: 0px;width: 100%;text-align: center;">
 
-        <a class="banquan" style="color:#000;text-decoration:none"
+        <a class="banquan" style="color:#000;text-decoration:none;z-index: 1"
                                          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=备案编号"
                                          target="_blank">京ICP备12345678900号</a>
                                         <a>   ©2021ZXYANG</a>

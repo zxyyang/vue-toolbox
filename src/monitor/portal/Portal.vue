@@ -1,15 +1,5 @@
 <template>
     <div class="banner">
-     <!--   <div class="item">
-            <img :src="dataList[currentIndex]">
-        </div>
-        <div class="page" v-if="this.dataList.length > 1">
-            <ul>
-                <li @click="gotoPage(prevIndex)">&lt;</li>
-                <li v-for=   " (item,index) in dataList" @click="gotoPage(index)" :key='item' :class="{'current':currentIndex == index}">  {{index+1}}</li>
-                <li @click="gotoPage(nextIndex)">&gt;</li>
-            </ul>
-        </div>-->
         <div class="text1">
         <p style="text-align: center;font-size: 50px ; font-family: 'Noto Sans', sans-serif;">如果我们有人忘记了约定,那就在月球相见!</p>
         <p style="text-align: center;font-size: 20px;color: blue ">Let's meet on the moon</p>
@@ -29,7 +19,7 @@
      <!--   <div style="margin-left: 500px">
             <img src="https://dpic.tiankong.com/gl/bp/QJ8876841567.jpg?x-oss-process=style/794ws" style="size: 50px " >
         </div>-->
-        
+
         <div style="background-color: black">
            </div>
     </div>
@@ -37,7 +27,7 @@
 
 <script>
     export default {
-        name: "index",
+        name: "portal",
         methods: {
             gotoPage(index) {
                 this.currentIndex = index;

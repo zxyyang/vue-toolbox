@@ -5,30 +5,30 @@
 
                 <!--<el-header><Header/></el-header>-->
                 <el-main>
-                    <Header/>
+                  <Header></Header>
                     <div class="men">
-                        <router-view></router-view>
-
+                        <router-view>
+                        </router-view>
+                      <beian></beian>
                     </div>
 
-                  <beian></beian>
                 </el-main>
             </el-container>
 
         </el-container>
+
     </div>
 </template>
 
 <script>
-    import Header from '../header/Header'
-    import beian from '../beian/beian'
-   // import Menu from '../menu/Menu'
+
+    import Header from "@/monitor/header/Header";
+    import Beian from "@/monitor/beian/beian";
     export default {
         components:{
-            beian,
-            Header,
+          Beian,
+          Header,
 
-          //  Menu
         }
     }
 </script>

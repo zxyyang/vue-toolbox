@@ -86,7 +86,7 @@
                     console.log(res.data)
                     switch(response.msg){
                         case '0': //登录成功
-                            this.$router.push('/main')
+                            this.$router.push('/index')
                             break;
                         case '1': //密码错误
                             this.$message.error('密码错误!')

@@ -1,17 +1,21 @@
 <template>
     <div>
         <el-breadcrumb separator-class="el-icon-arrow-right">
-            <el-breadcrumb-item :to="{ path: '/main' }">首页</el-breadcrumb-item>
-            <el-breadcrumb-item>后端笔记</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/index' }">首页</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/nurseinfoList' }">笔记</el-breadcrumb-item>
+
         </el-breadcrumb>
         <el-form :inline="true" :model="form" class="demo-form-inline">
             <el-form-item label="笔记名称">
-                <el-input v-model="form.customName"></el-input>
+                <el-input v-model="form.name"></el-input>
             </el-form-item>
+
+
+
             <el-form-item label="笔记等级">
-                <el-select v-model="form.foodWeek">
+                <el-select v-model="form.level">
                     <el-option label="--请选择--" value=""></el-option>
-                    <el-option label="一级" value="1"></el-option>
+                    <el-option label="一级" value="一级"></el-option>
                     <el-option label="二级" value="二级"></el-option>
                     <el-option label="三级" value="三级"></el-option>
                 </el-select>
@@ -25,12 +29,11 @@
                 :data="pageInfo.list"
                 border
                 style="width: 100%">
-
             <el-table-column type="expand">
                 <template slot-scope="props">
                     <el-form label-position="left" inline class="demo-table-expand">
                         <el-form-item>
-                            <span>{{ props.row.foodName}}</span>
+                            <span>{{ props.row.descibe}}</span>
                         </el-form-item>
                     </el-form>
                 </template>
@@ -39,31 +42,35 @@
                     type="index"
                     width="100">
             </el-table-column>
-        <!--    <el-table-column
-                    label="创建时间"
-                    width="150">
-                <template slot-scope="scope">
-                    {{ convert(scope.row.createDate) }}
-                </template>
-            </el-table-column>-->
             <el-table-column
-                    prop="customName"
+                    prop="name"
                     label="笔记名称"
                     width="250">
             </el-table-column>
 
 
+
+
             <el-table-column
-                    prop="foodWeek"
-                    label="笔记等级"
+                    prop="level"
+                    label="重要等级"
                     width="120">
             </el-table-column>
+           <!-- <el-table-column
+                    prop="price"
+                    label="护理价格（元）"
+                    width="120">
+            </el-table-column>-->
             <el-table-column
-                    prop="foodDate"
+                    prop="status"
                     label="备注"
                     width="450">
             </el-table-column>
-
+           <!-- <el-table-column
+                    prop="flag"
+                    label="是否增值"
+                    width="100">
+            </el-table-column>-->
             <el-table-column label="操作">
                 <template slot-scope="scope">
                     <el-button
@@ -88,21 +95,17 @@
 </template>
 
 <script>
-    import axios from 'axios'
+    import axios  from 'axios'
     import {HOST} from "../../common/config";
-    import {makeSimpleDate} from "../../common/dateformat";
-
     export default {
         data(){
             return{
                 currPage: 1, //当前页
                 form: {
-                    customName: '',
-                    foodWeek:''
-
+                    name: '',
+                    nursing_level: ''
                 },
                 pageInfo: {
-
                 }
             }
         },
@@ -117,7 +120,7 @@
             },
             //获取数据
             getData(){
-                let url = `${HOST}/foodmanage/query/${this.currPage}`
+                let url = `${HOST}/note/list`
                 axios.post(url,this.form).then(res=>{
                     console.log(res.data)
                     this.pageInfo = res.data
@@ -132,15 +135,15 @@
             },
             //跳转到新增界面
             handleAdd(){
-                this.$router.push("/foodAdd")
+                this.$router.push("/nurseinfoAdd")
             },
             //跳转到修改界面
             handleEdit(id){
-                this.$router.push(`/foodUpdate/${id}`)
+                this.$router.push(`/nurseinfoUpdate/${id}`)
             },
             //删除
             handleDelete(id){
-                let url = `${HOST}/foodmanage/del/${id}`
+                let url = `${HOST}/nurseinfo/del/${id}`
                 axios.get(url).then(res=>{
                     if(res.data.state === 200){
                         this.$message.success("删除成功")
@@ -150,17 +153,12 @@
                     }
                 })
             },
-            //日期格式转换
-            convert(date){
-                return makeSimpleDate(date)
-            }
+
 
         }
     }
 </script>
 
 <style scoped>
-    .demo-form-inline {
-        margin-top: 10px;
-    }
+
 </style>

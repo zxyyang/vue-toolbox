@@ -125,7 +125,7 @@
                 this.show =false;
                 this.shownurse = false;
                 this.showdietary = false;
-                this.$router.push("/main")
+                this.$router.push("/index")
             },
             showCont:function(){
                 this.show = true //!this.show ;

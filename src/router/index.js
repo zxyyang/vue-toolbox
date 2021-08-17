@@ -1,19 +1,14 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Portal from '../components/portal/Portal'
-import Main from '../components/main/Main'
-import UserInfoList from  '../components/userinfo/UserInfoList'
-import NurseInfoList from '../components/nurseinfo/NurseInfoList'
-import NurseInfoAdd from '../components/nurseinfo/NurseInfoAdd'
-import NurseInfoUpdate from '../components/nurseinfo/NurseInfoUpdate'
-import NurseRecordList from '../components/nurserecord/NurseRecordList'
-import NurseRecordAdd from '../components/nurserecord/NurseRecordAdd'
-import NurseRecordUpdate from '../components/nurserecord/NurseRecordUpdate'
-import UserInfoAdd from '../components/userinfo/UserInfoAdd'
-import UserInfoUpdate from '../components/userinfo/UserInfoUpdate'
-import FoodList from "../components/FoodManage/FoodList";
-import FoodAdd from "../components/FoodManage/FoodAdd";
-import FoodUpdate from "../components/FoodManage/FoodUpdate";
+import Portal from '../monitor/portal/Portal'
+import Main from '../monitor/main'
+import NurseInfoList from '../monitor/note/noteList'
+import NurseInfoAdd from '../monitor/note/NoteAdd'
+import NurseInfoUpdate from '../monitor/note/noteUpdate'
+import NurseRecordList from '../monitor/task/taskList'
+import NurseRecordAdd from '../monitor/task/taskAdd'
+import NurseRecordUpdate from '../monitor/task/taskUpdate'
+
 
 
 
@@ -32,11 +27,11 @@ const router = new Router({
     routes: [
 
         {
-            path: '/',
+            path: '/', redirect :'/index',
             component: Main,
             children: [ /*配置子路由*/
                 {
-                    path: '/Portal',
+                    path: '/index',
                     component: Portal,
                 },
 
@@ -64,33 +59,6 @@ const router = new Router({
                     path: '/nurserecordUpdate/:id',
                     component: NurseRecordUpdate,
                 },
-
-                {
-                    path: '/userinfoList',
-                    component: UserInfoList,
-                },
-                {
-                    path: '/userinfoAdd',
-                    component: UserInfoAdd,
-                },
-                {
-                    path: '/userinfoUpdate/:id',
-                    component: UserInfoUpdate,
-                },
-
-                {
-                    path: '/foodList',
-                    component: FoodList,
-                },
-                {
-                    path:'/foodAdd',
-                    component: FoodAdd,
-                },
-                {
-                    path: '/foodUpdate/:id',
-                    component: FoodUpdate,
-                },
-
 
             ]
         }

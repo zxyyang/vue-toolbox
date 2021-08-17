@@ -1,9 +1,9 @@
 <template>
     <div>
         <el-breadcrumb separator-class="el-icon-arrow-right">
-            <el-breadcrumb-item :to="{ path: '/main' }">首页</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/index' }">首页</el-breadcrumb-item>
             <el-breadcrumb-item :to="{ path: '/nurserecordList' }">前端任务</el-breadcrumb-item>
-            <el-breadcrumb-item>修改</el-breadcrumb-item>
+            <el-breadcrumb-item>新增</el-breadcrumb-item>
         </el-breadcrumb>
         <el-form ref="form" :rules="rules" :model="form" label-width="100px" class="content">
             <el-form-item label="任务名称" >
@@ -45,7 +45,7 @@
                 </el-input>
             </el-form-item>
             <el-form-item>
-                <el-button type="primary" @click="onSubmit('form')">修改</el-button>
+                <el-button type="primary" @click="onSubmit('form')">立即创建</el-button>
             </el-form-item>
         </el-form>
     </div>
@@ -54,6 +54,8 @@
 <script>
     import axios  from 'axios'
     import {HOST} from "../../common/config";
+
+
     export default {
         data(){
             return{
@@ -84,19 +86,21 @@
                     })
                 },
                 form: {
-                    id:'',
-                    customername: '',
-                    nursingname: '',
-                    count: '',
-                    time: '',
-                    staffname: '',
+
+                    customername: '',       //公司名称
+                    nursingname: '',  //行业
+                    time: '',     //规模
+                    count: '',     //注册资金
+                    status: '',       //联系方式
+                    staffname: '',   //地址
+
                 },
                 rules: { //校验规则
                     customername: [
-                        { required: true, message: '请输入护理名称', trigger: 'blur' },
+                        { required: true, message: '请输入客户姓名', trigger: 'blur' },
                     ],
                     staffname: [
-                        { required: true, message: '请选择操作人', trigger: 'blur' }
+                        { required: true, message: '请输入操作人', trigger: 'change' }
                     ],
                 },
                 pickerOptions: {
@@ -123,38 +127,30 @@
                             picker.$emit('pick', date);
                         }
                     }]
-                }
+                },
             }
         },
-        created(){
-            this.form.id = this.$route.params.id
-            this.getData();
-            this.selRecord();
-            this.selCustomer();
-            this. selInfo();
-        },
-        methods:{
-            //加载数据
-            getData(){
-                let url = `${HOST}/nurserecord/selById/${this.form.id}`
-                axios.get(url).then(res=>{
-                    this.form = res.data
-                })
-            },
 
+        created(){
+            this.selRecord()
+            this.selCustomer()
+            this.selInfo()
+        },
+
+        methods:{
             onSubmit(formName){
                 this.$refs[formName].validate((valid) => {
                     if (valid) { //校验通过
-                        let url = `${HOST}/nurserecord/update`
+                        let url = `${HOST}/nurserecord/add`
                         axios.post(url,this.form).then(res=>{
                             if(res.data.state === 200){//成功
-                                this.$message.success("修改成功")
+                                this.$message.success("添加成功")
                             }
                         })
                     }
                 })
             }
-            }
+        }
     }
 </script>
 
