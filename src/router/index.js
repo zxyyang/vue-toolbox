@@ -2,13 +2,10 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Portal from '../monitor/portal/Portal'
 import Main from '../monitor/main'
-import NurseInfoList from '../monitor/note/noteList'
-import NurseInfoAdd from '../monitor/note/NoteAdd'
-import NurseInfoUpdate from '../monitor/note/noteUpdate'
 import NurseRecordList from '../monitor/task/taskList'
 import NurseRecordAdd from '../monitor/task/taskAdd'
 import NurseRecordUpdate from '../monitor/task/taskUpdate'
-
+import Login from "@/monitor/login/Login";
 
 
 
@@ -25,6 +22,10 @@ Router.prototype.push = function push(location) {
 const router = new Router({
     mode:'history',
     routes: [
+        {
+          path:'/login',
+          component:Login
+        },
 
         {
             path: '/', redirect :'/index',
@@ -35,18 +36,7 @@ const router = new Router({
                     component: Portal,
                 },
 
-                {
-                    path: '/nurseinfoList',
-                    component: NurseInfoList,
-                },
-                {
-                    path: '/nurseinfoAdd',
-                    component: NurseInfoAdd,
-                },
-                {
-                    path: '/nurseinfoUpdate/:id',
-                    component: NurseInfoUpdate,
-                },
+
                 {
                     path: '/nurserecordList',
                     component: NurseRecordList,
@@ -61,7 +51,7 @@ const router = new Router({
                 },
 
             ]
-        }
+        },
 
     ]
 })

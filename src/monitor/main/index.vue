@@ -9,7 +9,7 @@
                     <div class="men">
                         <router-view>
                         </router-view>
-                      <beian></beian>
+
                     </div>
 
                 </el-main>
@@ -23,10 +23,10 @@
 <script>
 
     import Header from "@/monitor/header/Header";
-    import Beian from "@/monitor/beian/beian";
+
     export default {
         components:{
-          Beian,
+
           Header,
 
         }

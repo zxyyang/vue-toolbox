@@ -19,7 +19,7 @@
                                     label="UserName:" class="text1" style="text-align: left;margin-left: 60px;font-color: #FFFFFF">
                                 <el-input
                                         placeholder="Please input UserName"
-                                        v-model="form.username"
+                                        v-model="form.userName"
                                         clearable style="width: 70%">
                                 </el-input>
                             </el-form-item>
@@ -46,8 +46,9 @@
 </template>
 
 <script>
-    import axios from 'axios'
-    import {HOST} from '../../common/config'
+
+    import {login} from "@/api/login";
+
     export default {
         data(){
 
@@ -64,36 +65,26 @@
 
                 },
                 form: {
-                    username: '',
+                    userName: '',
                     password: '',
-                    label:''
                 }
             }
         },
         created(){
-            //取需要显示的数据
-            this.getData()
+
+
         },
         methods:{
-            handleClick() {
-                alert('button click');
-            },
 
             onSubmit(){
-                let url = `${HOST}/user/login`
-                axios.post(url,this.form).then(res=>{
-                    let response = res.data
+              login(this.form).then(res=>{
                     console.log(res.data)
-                    switch(response.msg){
-                        case '0': //登录成功
-                            this.$router.push('/index')
-                            break;
-                        case '1': //密码错误
-                            this.$message.error('密码错误!')
-                            break;
-                        case '2'://用户名错误
-                            this.$message.error("用户名错误")
-                            break;
+                    if(res.code =='200') {
+                      this.$message.success('登录成功！')
+                      sessionStorage.setItem("userName",this.form.userName )
+                      this.$router.push('/index')
+                    }else {
+                      this.$message.error('账号或密码错误！')
 
                     }
                 })

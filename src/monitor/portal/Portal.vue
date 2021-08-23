@@ -1,27 +1,28 @@
 <template>
     <div class="banner">
-        <div class="text1">
-        <p style="text-align: center;font-size: 50px ; font-family: 'Noto Sans', sans-serif;">如果我们有人忘记了约定,那就在月球相见!</p>
-        <p style="text-align: center;font-size: 20px;color: blue ">Let's meet on the moon</p>
-    </div>
+<!--        <div class="text1">-->
+<!--        <p style="text-align: center;font-size: 50px ; font-family: 'Noto Sans', sans-serif;">如果我们有人忘记了约定,那就在月球相见!</p>-->
+<!--        <p style="text-align: center;font-size: 20px;color: blue ">Let's meet on the moon</p>-->
+<!--    </div>-->
 
-        <div class="text2">
+<!--        <div class="text2">-->
 
-            <h1 >
-                 To The <br>Moon
-                <svg width="400" height="70" viewBox="0 0 300 41" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M6 35C58.3333 35.8333 145.5 35 203 6.5" stroke="#43E229" stroke-width="11" stroke-linecap="round" stroke-linejoin="round" id="tick" />
-                </svg>
-            </h1>
-        </div>
+<!--            <h1 >-->
+<!--                 To The <br>Moon-->
+<!--                <svg width="400" height="70" viewBox="0 0 300 41" fill="none" xmlns="http://www.w3.org/2000/svg">-->
+<!--                    <path d="M6 35C58.3333 35.8333 145.5 35 203 6.5" stroke="#43E229" stroke-width="11" stroke-linecap="round" stroke-linejoin="round" id="tick" />-->
+<!--                </svg>-->
+<!--            </h1>-->
+<!--        </div>-->
 
 
-     <!--   <div style="margin-left: 500px">
-            <img src="https://dpic.tiankong.com/gl/bp/QJ8876841567.jpg?x-oss-process=style/794ws" style="size: 50px " >
-        </div>-->
+<!--     &lt;!&ndash;   <div style="margin-left: 500px">-->
+<!--            <img src="https://dpic.tiankong.com/gl/bp/QJ8876841567.jpg?x-oss-process=style/794ws" style="size: 50px " >-->
+<!--        </div>&ndash;&gt;-->
 
-        <div style="background-color: black">
-           </div>
+<!--        <div style="background-color: black">-->
+<!--      <beian></beian>-->
+<!--           </div>-->
     </div>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-  <div >
+  <div class="App" :style="App">
     <router-view></router-view>
 
 
@@ -12,12 +12,23 @@
 
 
     export default {
+      data(){
+        return{
+          App:{
+
+
+          }
+
+        }
+      }
 
 
     }
 </script>
 
 <style>
-
+.App{
+  background-color: #212121;
+}
 
 </style>
