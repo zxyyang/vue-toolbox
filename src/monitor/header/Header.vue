@@ -1,33 +1,30 @@
 <template>
   <div >
     <el-row type="flex" class="row-bg" justify="space-between">
-      <el-col :span="7"><div class="leftRow"></div></el-col>
-      <el-col :span="12"><div class="centRow">
-
-        <el-row type="flex" class="index" justify="space-between">
-          <el-col :span="7"> <div class="toNote">
-        <el-link  :underline="true" @click="toNote"  style="color: #000000 ;font-weight: 900;font-size: 15px">Note</el-link>
-        </div></el-col>
-            <el-col :span="7"><div class="toTask">
-        <el-link  :underline="true" @click="toTask"  style="color: #000000 ;font-weight: 900;font-size: 15px">Task</el-link>
-        </div></el-col>
-              <el-col :span="7"> <div class="toFile">
-        <el-link  :underline="true" @click="toFile"  style="color: #000000 ;font-weight: 900;font-size: 15px">File</el-link>
-        </div>/el-col>
-                <el-col :span="7"> <div class="toChart">
-        <el-link  :underline="true" @click="toChart"  style="color: #000000 ;font-weight: 900;font-size: 15px">Chart</el-link>
-        </div></el-col>
+      <el-col :span="4"><div ></div></el-col>
+      <el-col :span="4"><div class="leftRow" >
+        <el-image  :src="require('@/image/tothemoon.png')"   @click=toIndex() style="object-fit: scale-down; cursor: pointer"></el-image>
+      </div></el-col>
+      <el-col :span="10"><div class="centRow">
+        <div style="flex: auto;text-align: center;"><el-link  :underline="true" @click="toNote"  style="color: #FFFFFF ;font-weight:500;font-size: medium; ">Note</el-link></div>
+        <div style="flex: auto;text-align: center"><el-link  :underline="true" @click="toTask"  style="color: #FFFFFF ;font-weight:500;font-size: medium ;">Task</el-link></div>
+        <div style="flex: auto;text-align: center"><el-link  :underline="true" @click="toFile"  style="color: #FFFFFF ;font-weight:500;font-size: medium;">File</el-link></div>
+        <div style="flex: auto;text-align: center"><el-link  :underline="true" @click="toChart"  style="color: #FFFFFF ;font-weight:500;font-size: medium;">Chart</el-link></div>
+        <div style="flex: auto;text-align: center"><el-link  :underline="true" @click="toResource"  style="color: #FFFFFF ;font-weight:500;font-size: medium;">Resource</el-link></div>
+        <div style="flex: auto;text-align: center"><el-link  :underline="true" @click="toAbout"  style="color: #FFFFFF ;font-weight:500;font-size: medium;">About</el-link></div>
+        <div style="flex: auto;text-align: center"> <el-button type="primary" round>主要按钮</el-button></div>
 
       </div></el-col>
-      <el-col :span="2"><div class="rightRow">
+      <el-col :span="3"><div class="rightRow">
         <div class="logOut" >
-        <el-link  :underline="true" @click="logout"  style="color: #000000 ;font-weight: 900;font-size: 15px">Log Out</el-link>
+        <el-link  :underline="true" @click="logout"  style="color: #FFFFFF ;font-size: small">Log Out</el-link>
       </div>
         </div></el-col>
-    </el-row>
 
 
 
+
+</el-row>
   </div>
 </template>
 
@@ -38,13 +35,30 @@ export default {
 
     return {
 
-      activeIndex: '1',
-      activeIndex2: '1'
     };
   },
   methods: {
-    handleSelect(key, keyPath) {
-      console.log(key, keyPath);
+    toIndex(){
+
+      this.$router.push("/index1")
+    },
+    toNote(){
+      this.$router.push("/note")
+    },
+    toTask(){
+      this.$router.push("/task")
+    },
+    toFile(){
+      this.$router.push("/file")
+    },
+    toChart(){
+      this.$router.push("/chart")
+    },
+    toResource(){
+      this.$router.push("/resource")
+    },
+    toAbout(){
+      this.$router.push("/about")
     }
   }
 }
@@ -57,35 +71,37 @@ export default {
   align-items: center;
   -webkit-justify-content: center;
   justify-content: center;
-  background: #e5e9f2;
+  /*background: #e5e9f2;*/
   border-radius: 4px;
   min-height: 50px;
 
 }
 .centRow{
+
   display: flex;
   align-items: center;
   -webkit-justify-content: center;
   justify-content: center;
-  background: #e5e9f2;
+  /*background: #e5e9f2;*/
   border-radius: 4px;
   min-height: 50px;
 }
 .leftRow{
+height: 10px;
   display: flex;
   align-items: center;
   -webkit-justify-content: center;
   justify-content: center;
-  background: #e5e9f2;
-  border-radius: 4px;
-  min-height: 50px;
+
+
 }
 
 .row-bg {
-  display: flex;
-  margin-top: 20px;
-  padding: 10px 0;
-  -webkit-align-items: center;
+
+  object-fit: scale-down;
+  /*display: flex;*/
+  padding: 30px 0;
+  /*-webkit-align-items: center;*/
   /*background-color: #f9fafc;*/
 }
 .logOut{

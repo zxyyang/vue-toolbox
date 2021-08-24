@@ -1,127 +1,110 @@
 <template>
-    <div class="banner">
-<!--        <div class="text1">-->
-<!--        <p style="text-align: center;font-size: 50px ; font-family: 'Noto Sans', sans-serif;">如果我们有人忘记了约定,那就在月球相见!</p>-->
-<!--        <p style="text-align: center;font-size: 20px;color: blue ">Let's meet on the moon</p>-->
-<!--    </div>-->
-
-<!--        <div class="text2">-->
-
-<!--            <h1 >-->
-<!--                 To The <br>Moon-->
-<!--                <svg width="400" height="70" viewBox="0 0 300 41" fill="none" xmlns="http://www.w3.org/2000/svg">-->
-<!--                    <path d="M6 35C58.3333 35.8333 145.5 35 203 6.5" stroke="#43E229" stroke-width="11" stroke-linecap="round" stroke-linejoin="round" id="tick" />-->
-<!--                </svg>-->
-<!--            </h1>-->
-<!--        </div>-->
-
-
-<!--     &lt;!&ndash;   <div style="margin-left: 500px">-->
-<!--            <img src="https://dpic.tiankong.com/gl/bp/QJ8876841567.jpg?x-oss-process=style/794ws" style="size: 50px " >-->
-<!--        </div>&ndash;&gt;-->
-
-<!--        <div style="background-color: black">-->
-<!--      <beian></beian>-->
-<!--           </div>-->
+  <div class="bg">
+    <div class="one" >
+      <div class="text_1">
+        <p style="text-align: center;font-size: 50px ; font-family: 'Noto Sans', sans-serif;">如果我们有人忘记了约定,那就在月球相见!</p>
+        <p style="text-align: center;font-size: 20px;color: blue ">Let's meet on the moon</p>
+      </div>
     </div>
+    <div class="tow" >
+      <div class="text_2" >
+        <p style="text-align: center;font-size: 50px ;color: white ">第二页展示页面!</p>
+        <p style="text-align: center;font-size: 20px;color: green ">The Second Page!</p>
+      </div>
+    </div>
+    <div class="three" >
+      <div class="text_3" >
+        <p style="text-align: center;font-size: 50px ; ">第三页展示页面!</p>
+        <p style="text-align: center;font-size: 20px;color: blueviolet ">The Third Page!</p>
+      </div>
+    </div>
+    <div class="four" >
+      <div class="text_3" >
+        <p style="text-align: center;font-size: 50px ; ">这里要放动画!</p>
+      </div>
+    </div>
+
+<beian></beian>
+  </div>
+
 </template>
 
+
 <script>
+
+
+    import Beian from "@/monitor/beian/Beian";
     export default {
         name: "portal",
-        methods: {
-            gotoPage(index) {
-                this.currentIndex = index;
-            }
-        },
+      components: {
+        Beian,
+
+      },
+      methods: {
 
         data: function() {
             return {
-               dataList: ["https://www.lifeofpix.com/wp-content/uploads/2017/11/LifeofPix-11-2-1600x1068.jpg","https://www.lifeofpix.com/wp-content/uploads/2017/11/LifeofPix-18-1600x1068.jpg", "https://www.lifeofpix.com/wp-content/uploads/2017/11/LifeofPix-12-1600x1068.jpg",],
-                currentIndex: 0,   //默认显示图片
-                timer: null    //定时器
+
             }
         },
-        runInv() {
-            this.timer = setInterval(() => {
-                this.gotoPage(this.nextIndex)
-            }, 1000)
-        },
+
         computed: {
-            //上一张
-            prevIndex() {
-                if(this.currentIndex == 0) {
-                    return this.dataList.length - 1;
-                }else{
-                    return this.currentIndex - 1;
-                }
-            },
-            //下一张
-            nextIndex() {
-                if(this.currentIndex == this.dataList.length - 1) {
-                    return 0;
-                }else {
-                    return this.currentIndex + 1;
-                }
-            }
+
+
         }
+    }
     }
 
 </script>
 
 <style scoped>
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&display=swap');
-
-    body {
-        font-family: 'Noto Sans', sans-serif;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-    }
-
-    h1 {
-        font-size: 80px;
-        width: 230px;
-        line-height: 1em;
-        letter-spacing: -0.05em;
-        position: relative;
-    }
-
-    h1 svg {
-        position: absolute;
-        bottom: -20px;
-        left: -20px;
-        z-index: -1;
-    }
-
-    #tick {
-        stroke-dasharray: 210px;
-        stroke-dashoffset: 210px;
-        animation: 3s tick ease-in-out infinite;
-    }
-
-    @keyframes tick {
-        0%, 50% {
-            stroke-dashoffset: 210px;
-        }
-        50%, 100% {
-            stroke-dashoffset: 0px;
-        }
-    }
-.banner{
-    width: 100%;
-    white-space:nowrap;
+.one{
+  background-color: #FFFFFF ;
+  height:  1000px;
+  width: 100%;
+  /*防止子组件margain-top影响父组件*/
+  overflow: hidden;
+  /*居中对齐=放父组件中*/
+  -webkit-align-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-    .text1{
-        margin-top: 80px;
-        white-space:nowrap;
-    }
-    .text2{
-        display: flex;
-        justify-content: center;
-        align-items: center;
+.tow{
+  height:  1000px;
+  /*防止子组件margain-top影响父组件*/
+  overflow: hidden;
+  /*居中对齐=放父组件中*/
+  -webkit-align-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.three{
+  background-color: #FFFFFF;
+  height:  1000px;
+  /*防止子组件margain-top影响父组件*/
+  overflow: hidden;
+  /*居中对齐=放父组件中*/
+  -webkit-align-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.four{
+  background-color:blue;
+  height:  1000px;
+  /*防止子组件margain-top影响父组件*/
+  overflow: hidden;
+  /*居中对齐=放父组件中*/
+  -webkit-align-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.text_1{
+height: 20%;
+}
 
-    }
 
 </style>

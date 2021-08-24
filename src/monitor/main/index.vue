@@ -1,21 +1,16 @@
 <template>
-    <div id="app">
-        <el-container>
-            <el-container>
+    <div class="app">
 
-                <!--<el-header><Header/></el-header>-->
-                <el-main>
+            <el-container >
+
+                <el-main >
                   <Header></Header>
-                    <div class="men">
-                        <router-view>
-                        </router-view>
-
-                    </div>
+                  <router-view></router-view>
 
                 </el-main>
             </el-container>
 
-        </el-container>
+
 
     </div>
 </template>
@@ -45,26 +40,9 @@
         padding: 0;
     }
 
-    .el-container {
-       height: 100vh;
-        min-height: 600px;
-    }
 
 
-    .el-aside{
-       /* width: 220px !important;*/
-        height: 100%;
-        background-color: #545c64;
-    }
-
-    .el-main{
-        padding: 10px !important;
-
-        width: auto;
-    }
-    .men{
-        margin-left: 20px;
-        margin-top: 20px;
-        margin-right: 20px;
+    .el-main {
+      padding: 0 !important;
     }
 </style>
