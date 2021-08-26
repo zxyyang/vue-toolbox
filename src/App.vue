@@ -28,7 +28,7 @@
 
 <style>
 .App{
-  background-color: #212121;
+  background-color: #212121 !important;
 }
 
 </style>

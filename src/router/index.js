@@ -2,9 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Portal from '../monitor/portal/Portal'
 import Main from '../monitor/main'
-import NurseRecordList from '../monitor/task/taskList'
-import NurseRecordAdd from '../monitor/task/taskAdd'
-import NurseRecordUpdate from '../monitor/task/taskUpdate'
+import Note from '../monitor/note/Note'
 import Login from "@/monitor/login/Login";
 
 
@@ -35,20 +33,12 @@ const router = new Router({
                     path: '/index',
                     component: Portal,
                 },
+                {
+                    path: '/note',
+                    component: Note,
+                },
 
 
-                {
-                    path: '/nurserecordList',
-                    component: NurseRecordList,
-                },
-                {
-                    path: '/nurserecordAdd',
-                    component: NurseRecordAdd,
-                },
-                {
-                    path: '/nurserecordUpdate/:id',
-                    component: NurseRecordUpdate,
-                },
 
             ]
         },
