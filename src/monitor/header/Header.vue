@@ -1,10 +1,11 @@
 <template>
   <div >
     <el-row type="flex" class="row-bg" justify="space-between">
-      <el-col :span="4"><div ></div></el-col>
-      <el-col :span="4"><div class="leftRow" >
-        <el-image  :src="require('@/image/tothemoon.png')"   @click=toIndex() style="object-fit: scale-down; cursor: pointer"></el-image>
+
+      <el-col :span="10"><div class="leftRow" >
+        <el-image  :src="require('@/image/tothemoon.png')"   @click=toIndex() style="object-fit: scale-down; cursor: pointer;margin-top: 2%" ></el-image>
       </div></el-col>
+
       <el-col :span="10"><div class="centRow">
         <div style="flex: auto;text-align: center;"><el-link  :underline="true" @click="toNote"  style="color: #FFFFFF ;font-weight:500;font-size: medium; ">Note</el-link></div>
         <div style="flex: auto;text-align: center"><el-link  :underline="true" @click="toTask"  style="color: #FFFFFF ;font-weight:500;font-size: medium ;">Task</el-link></div>
@@ -12,10 +13,10 @@
         <div style="flex: auto;text-align: center"><el-link  :underline="true" @click="toChart"  style="color: #FFFFFF ;font-weight:500;font-size: medium;">Chart</el-link></div>
         <div style="flex: auto;text-align: center"><el-link  :underline="true" @click="toResource"  style="color: #FFFFFF ;font-weight:500;font-size: medium;">Resource</el-link></div>
         <div style="flex: auto;text-align: center"><el-link  :underline="true" @click="toAbout"  style="color: #FFFFFF ;font-weight:500;font-size: medium;">About</el-link></div>
-        <div style="flex: auto;text-align: center"> <el-button type="primary" round>主要按钮</el-button></div>
+        <div style="flex: auto;text-align: center"> <el-button  round>主要按钮</el-button></div>
 
       </div></el-col>
-      <el-col :span="3"><div class="rightRow">
+      <el-col :span="4"><div class="rightRow">
         <div class="logOut" >
         <el-link  :underline="true" @click="logout"  style="color: #FFFFFF ;font-size: small">Log Out</el-link>
       </div>
@@ -40,7 +41,7 @@ export default {
   methods: {
     toIndex(){
 
-      this.$router.push("/index1")
+      this.$router.push("/index")
     },
     toNote(){
       this.$router.push("/note")
@@ -97,7 +98,7 @@ height: 10px;
 }
 
 .row-bg {
-
+  height: 100px;
   object-fit: scale-down;
   /*display: flex;*/
   padding: 30px 0;
