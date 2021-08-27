@@ -1,29 +1,24 @@
 <template>
   <div class="App" :style="App">
-    <router-view></router-view>
-
+    <router-view />
 
   </div>
-
 
 </template>
 
 <script>
 
+export default {
+  data() {
+    return {
+      App: {
 
-    export default {
-      data(){
-        return{
-          App:{
-
-
-          }
-
-        }
       }
 
-
     }
+  }
+
+}
 </script>
 
 <style>

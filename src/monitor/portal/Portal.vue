@@ -1,59 +1,56 @@
 <template>
   <div class="bg">
-    <div class="one" >
+    <div class="one">
       <div class="text_1">
         <p style="text-align: center;font-size: 50px ; font-family: 'Noto Sans', sans-serif;color: white">如果我们有人忘记了约定,那就在月球相见!</p>
         <p style="text-align: center;font-size: 20px;color: blue ">Let's meet on the moon</p>
       </div>
     </div>
-    <div class="tow" >
-      <div class="text_2" >
+    <div class="tow">
+      <div class="text_2">
         <p style="text-align: center;font-size: 50px ; ">第二页展示页面!</p>
         <p style="text-align: center;font-size: 20px;color: green ">The Second Page!</p>
       </div>
     </div>
-    <div class="three" >
-      <div class="text_3" >
+    <div class="three">
+      <div class="text_3">
         <p style="text-align: center;font-size: 50px ;color: white ">第三页展示页面!</p>
         <p style="text-align: center;font-size: 20px;color: blueviolet ">The Third Page!</p>
       </div>
     </div>
-    <div class="four" >
-      <div class="text_3" >
+    <div class="four">
+      <div class="text_3">
         <p style="text-align: center;font-size: 50px ; ">这里要放动画!</p>
       </div>
     </div>
 
-<beian></beian>
+    <beian />
   </div>
 
 </template>
 
-
 <script>
 
+import Beian from '@/monitor/beian/Beian'
+export default {
+  name: 'Portal',
+  components: {
+    Beian
 
-    import Beian from "@/monitor/beian/Beian";
-    export default {
-        name: "portal",
-      components: {
-        Beian,
+  },
+  methods: {
 
-      },
-      methods: {
+    data: function() {
+      return {
 
-        data: function() {
-            return {
+      }
+    },
 
-            }
-        },
+    computed: {
 
-        computed: {
-
-
-        }
     }
-    }
+  }
+}
 
 </script>
 
@@ -106,6 +103,5 @@
 .text_1{
 height: 20%;
 }
-
 
 </style>

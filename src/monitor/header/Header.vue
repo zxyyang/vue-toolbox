@@ -1,65 +1,60 @@
 <template>
-  <div >
+  <div>
     <el-row type="flex" class="row-bg" justify="space-between">
 
-      <el-col :span="10"><div class="leftRow" >
-        <el-image  :src="require('@/image/tothemoon.png')"   @click=toIndex() style="object-fit: scale-down; cursor: pointer;margin-top: 2%" ></el-image>
+      <el-col :span="10"><div class="leftRow">
+        <el-image :src="require('@/image/tothemoon.png')" style="object-fit: scale-down; cursor: pointer;margin-top: 2%" @click="toIndex()" />
       </div></el-col>
 
       <el-col :span="10"><div class="centRow">
-        <div style="flex: auto;text-align: center;"><el-link  :underline="true" @click="toNote"  style="color: #FFFFFF ;font-weight:500;font-size: medium; ">Note</el-link></div>
-        <div style="flex: auto;text-align: center"><el-link  :underline="true" @click="toTask"  style="color: #FFFFFF ;font-weight:500;font-size: medium ;">Task</el-link></div>
-        <div style="flex: auto;text-align: center"><el-link  :underline="true" @click="toFile"  style="color: #FFFFFF ;font-weight:500;font-size: medium;">File</el-link></div>
-        <div style="flex: auto;text-align: center"><el-link  :underline="true" @click="toChart"  style="color: #FFFFFF ;font-weight:500;font-size: medium;">Chart</el-link></div>
-        <div style="flex: auto;text-align: center"><el-link  :underline="true" @click="toResource"  style="color: #FFFFFF ;font-weight:500;font-size: medium;">Resource</el-link></div>
-        <div style="flex: auto;text-align: center"><el-link  :underline="true" @click="toAbout"  style="color: #FFFFFF ;font-weight:500;font-size: medium;">About</el-link></div>
-        <div style="flex: auto;text-align: center"> <el-button  round>主要按钮</el-button></div>
+        <div style="flex: auto;text-align: center;"><el-link :underline="true" style="color: #FFFFFF ;font-weight:500;font-size: medium; " @click="toNote">Note</el-link></div>
+        <div style="flex: auto;text-align: center"><el-link :underline="true" style="color: #FFFFFF ;font-weight:500;font-size: medium ;" @click="toTask">Task</el-link></div>
+        <div style="flex: auto;text-align: center"><el-link :underline="true" style="color: #FFFFFF ;font-weight:500;font-size: medium;" @click="toFile">File</el-link></div>
+        <div style="flex: auto;text-align: center"><el-link :underline="true" style="color: #FFFFFF ;font-weight:500;font-size: medium;" @click="toChart">Chart</el-link></div>
+        <div style="flex: auto;text-align: center"><el-link :underline="true" style="color: #FFFFFF ;font-weight:500;font-size: medium;" @click="toResource">Resource</el-link></div>
+        <div style="flex: auto;text-align: center"><el-link :underline="true" style="color: #FFFFFF ;font-weight:500;font-size: medium;" @click="toAbout">About</el-link></div>
+        <div style="flex: auto;text-align: center"> <el-button round>主要按钮</el-button></div>
 
       </div></el-col>
       <el-col :span="4"><div class="rightRow">
-        <div class="logOut" >
-        <el-link  :underline="true" @click="logout"  style="color: #FFFFFF ;font-size: small">Log Out</el-link>
-      </div>
-        </div></el-col>
+        <div class="logOut">
+          <el-link :underline="true" style="color: #FFFFFF ;font-size: small" @click="logout">Log Out</el-link>
+        </div>
+      </div></el-col>
 
-
-
-
-</el-row>
+    </el-row>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Header",
+  name: 'Header',
   data() {
-
     return {
 
-    };
+    }
   },
   methods: {
-    toIndex(){
-
-      this.$router.push("/index")
+    toIndex() {
+      this.$router.push('/index')
     },
-    toNote(){
-      this.$router.push("/note")
+    toNote() {
+      this.$router.push('/note')
     },
-    toTask(){
-      this.$router.push("/task")
+    toTask() {
+      this.$router.push('/task')
     },
-    toFile(){
-      this.$router.push("/file")
+    toFile() {
+      this.$router.push('/file')
     },
-    toChart(){
-      this.$router.push("/chart")
+    toChart() {
+      this.$router.push('/chart')
     },
-    toResource(){
-      this.$router.push("/resource")
+    toResource() {
+      this.$router.push('/resource')
     },
-    toAbout(){
-      this.$router.push("/about")
+    toAbout() {
+      this.$router.push('/about')
     }
   }
 }
@@ -93,7 +88,6 @@ height: 10px;
   align-items: center;
   -webkit-justify-content: center;
   justify-content: center;
-
 
 }
 

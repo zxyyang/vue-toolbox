@@ -1,96 +1,97 @@
 <template>
-    <div class="all">
+  <div class="all">
 
-        <div class="wrap" >
-            <el-row type="flex"  justify="center">
-                <el-col :span="6"></el-col>
-                <el-col :span="6">
-                    <div class="head" style=" display: flex;justify-content: center;align-items: center;">
-                        <h1>
-                            To The Moon
-                            <svg width="200" height="36" viewBox="0 0 200 41" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M6 35C58.3333 35.8333 145.5 35 203 6.5" stroke="#43E229" stroke-width="11" stroke-linecap="round" stroke-linejoin="round" id="tick" />
-                            </svg>
-                        </h1>
-                    </div>
-                    <div  class="border">
-                        <el-form   ref="form" :model="form" class="login" label-width="100px">
-                            <el-form-item
-                                    label="UserName:" class="text1" style="text-align: left;margin-left: 60px;font-color: #FFFFFF">
-                                <el-input
-                                        placeholder="Please input UserName"
-                                        v-model="form.userName"
-                                        clearable style="width: 70%">
-                                </el-input>
-                            </el-form-item>
-                            <el-form-item label="Password:" style="text-align: left;margin-left: 60px;color: #FFFFFF">
-                                <el-input
-                                        style="width: 70%;"
-                                        placeholder="please input password"
-                                        v-model="form.password"
-                                        show-password>
-                                </el-input>
-                            </el-form-item>
+    <div class="wrap">
+      <el-row type="flex" justify="center">
+        <el-col :span="6" />
+        <el-col :span="6">
+          <div class="head" style=" display: flex;justify-content: center;align-items: center;">
+            <h1>
+              To The Moon
+              <svg width="200" height="36" viewBox="0 0 200 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path id="tick" d="M6 35C58.3333 35.8333 145.5 35 203 6.5" stroke="#43E229" stroke-width="11" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </h1>
+          </div>
+          <div class="border">
+            <el-form ref="form" :model="form" class="login" label-width="100px">
+              <el-form-item
+                label="UserName:"
+                class="text1"
+                style="text-align: left;margin-left: 60px;font-color: #FFFFFF"
+              >
+                <el-input
+                  v-model="form.userName"
+                  placeholder="Please input UserName"
+                  clearable
+                  style="width: 70%"
+                />
+              </el-form-item>
+              <el-form-item label="Password:" style="text-align: left;margin-left: 60px;color: #FFFFFF">
+                <el-input
+                  v-model="form.password"
+                  style="width: 70%;"
+                  placeholder="please input password"
+                  show-password
+                />
+              </el-form-item>
 
-                            <div style="text-align:center">
-                                <el-button class="but1" @click="onSubmit" style="margin-right: 0px">LogIn</el-button>
+              <div style="text-align:center">
+                <el-button class="but1" style="margin-right: 0px" @click="onSubmit">LogIn</el-button>
 
-                            </div>
-                        </el-form>
-                    </div>
-                </el-col>
-                <el-col :span="6"><div ></div></el-col>
-            </el-row>
-        </div>
+              </div>
+            </el-form>
+          </div>
+        </el-col>
+        <el-col :span="6"><div /></el-col>
+      </el-row>
     </div>
+  </div>
 </template>
 
 <script>
 
-    import {login} from "@/api/login";
+import { login } from '@/api/login'
 
-    export default {
-        data(){
+export default {
+  data() {
+    return {
+      input: '',
 
-            return{
-                input: '',
+      backgroundDiv: {
 
-                backgroundDiv: {
+        backgroundImage: 'url(https://www.lifeofpix.com/wp-content/uploads/2014/05/Life-of-pix-window-Sarah-babineau-1600x1030.jpg)',
 
-                    backgroundImage:'url(https://www.lifeofpix.com/wp-content/uploads/2014/05/Life-of-pix-window-Sarah-babineau-1600x1030.jpg)',
+        backgroundRepeat: 'no-repeat',
 
-                    backgroundRepeat:'no-repeat',
+        backgroundSize: '100% 130%'
 
-                    backgroundSize:'100% 130%',
-
-                },
-                form: {
-                    userName: '',
-                    password: '',
-                }
-            }
-        },
-        created(){
-
-
-        },
-        methods:{
-
-            onSubmit(){
-              login(this.form).then(res=>{
-                    console.log(res.data)
-                    if(res.code =='200') {
-                      this.$message.success('登录成功！')
-                      sessionStorage.setItem("userName",this.form.userName )
-                      this.$router.push('/index')
-                    }else {
-                      this.$message.error('账号或密码错误！')
-
-                    }
-                })
-            }
-        }
+      },
+      form: {
+        userName: '',
+        password: ''
+      }
     }
+  },
+  created() {
+
+  },
+  methods: {
+
+    onSubmit() {
+      login(this.form).then(res => {
+        console.log(res.data)
+        if (res.code === 200) {
+          this.$message.success('登录成功！')
+          sessionStorage.setItem('userName', this.form.userName)
+          this.$router.push('/index')
+        } else {
+          this.$message.error('账号或密码错误！')
+        }
+      })
+    }
+  }
+}
 </script>
 
 <style scoped>
@@ -147,7 +148,6 @@
     .text1{
         padding-top: 30px;
         white-space:nowrap;
-
 
     }
 

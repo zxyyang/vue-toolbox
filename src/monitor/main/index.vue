@@ -1,31 +1,29 @@
 <template>
-    <div class="app">
+  <div class="app">
 
-            <el-container >
+    <el-container>
 
-                <el-main >
-                  <Header></Header>
-                  <router-view></router-view>
+      <el-main>
+        <Header />
+        <router-view />
 
-                </el-main>
-            </el-container>
+      </el-main>
+    </el-container>
 
-
-
-    </div>
+  </div>
 </template>
 
 <script>
 
-    import Header from "@/monitor/header/Header";
+import Header from '@/monitor/header/Header'
 
-    export default {
-        components:{
+export default {
+  components: {
 
-          Header,
+    Header
 
-        }
-    }
+  }
+}
 </script>
 
 <style>
@@ -39,8 +37,6 @@
         margin: 0;
         padding: 0;
     }
-
-
 
     .el-main {
       padding: 0 !important;
