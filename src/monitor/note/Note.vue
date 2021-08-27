@@ -29,22 +29,21 @@
           label="时间"
         />
       </el-table>
-    </div>
-    <div>
       <!--    分页-->
-      <el-col :span="24" class="toolbar" style="position:absolute;bottom:10px;right:0">
-        <el-pagination
-          :current-page="currentPage"
-          :page-sizes="[10, 20, 50]"
-          :page-size="pageSize"
-          layout="total, sizes, prev, pager, next, jumper"
-          :total="total"
-          style="float: right;"
-          @size-change="handleSizeChange"
-          @current-change="handleCurrentChange"
-        />
-      </el-col>
+
+      <el-pagination
+        :current-page="currentPage"
+        :page-sizes="[10, 20, 50]"
+        :page-size="pageSize"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="total"
+        style="float: right;  background-color: #FFFFFF"
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+      />
+
     </div>
+
   </div>
 </template>
 

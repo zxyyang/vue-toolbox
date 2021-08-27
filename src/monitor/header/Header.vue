@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="head">
     <el-row type="flex" class="row-bg" justify="space-between">
 
       <el-col :span="10"><div class="leftRow">
@@ -9,7 +9,7 @@
       <el-col :span="10"><div class="centRow">
         <div style="flex: auto;text-align: center;"><el-link :underline="true" style="color: #FFFFFF ;font-weight:500;font-size: medium; " @click="toNote">Note</el-link></div>
         <div style="flex: auto;text-align: center"><el-link :underline="true" style="color: #FFFFFF ;font-weight:500;font-size: medium ;" @click="toTask">Task</el-link></div>
-        <div style="flex: auto;text-align: center"><el-link :underline="true" style="color: #FFFFFF ;font-weight:500;font-size: medium;" @click="toFile">File</el-link></div>
+        <div style="flex: auto;text-align: center"><el-link :underline="true" style="color: #FFFFFF ;font-weight:500;font-size: medium;" @click="toCloudDisk">CloudDisk</el-link></div>
         <div style="flex: auto;text-align: center"><el-link :underline="true" style="color: #FFFFFF ;font-weight:500;font-size: medium;" @click="toChart">Chart</el-link></div>
         <div style="flex: auto;text-align: center"><el-link :underline="true" style="color: #FFFFFF ;font-weight:500;font-size: medium;" @click="toResource">Resource</el-link></div>
         <div style="flex: auto;text-align: center"><el-link :underline="true" style="color: #FFFFFF ;font-weight:500;font-size: medium;" @click="toAbout">About</el-link></div>
@@ -19,6 +19,11 @@
       <el-col :span="4"><div class="rightRow">
         <div class="logOut">
           <el-link :underline="true" style="color: #FFFFFF ;font-size: small" @click="logout">Log Out</el-link>
+        </div>
+        <div>
+          <a-locale-provider :locale="zh_CN">
+            <App />
+          </a-locale-provider>
         </div>
       </div></el-col>
 
@@ -44,8 +49,8 @@ export default {
     toTask() {
       this.$router.push('/task')
     },
-    toFile() {
-      this.$router.push('/file')
+    toCloudDisk() {
+      this.$router.push('/cloudDisk')
     },
     toChart() {
       this.$router.push('/chart')
@@ -61,7 +66,11 @@ export default {
 </script>
 
 <style scoped>
+.head{
 
+  background-color: #212121;
+
+}
 .rightRow{
   display: flex;
   align-items: center;

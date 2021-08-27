@@ -23,7 +23,7 @@ export default {
 
 <style>
 .App{
-  background-color: #212121 !important;
+  /*background-color: #212121 !important;*/
 }
 
 </style>
