@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Portal from '../monitor/portal/Portal'
 import Main from '../monitor/main'
 import Note from '../monitor/note/Note'
+import Task from '../monitor/task/Task'
 import Login from "@/monitor/login/Login";
 
 
@@ -36,6 +37,10 @@ const router = new Router({
                 {
                     path: '/note',
                     component: Note,
+                },
+                {
+                    path: '/task',
+                    component: Task,
                 },
 
 
