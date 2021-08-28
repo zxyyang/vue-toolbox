@@ -8,3 +8,10 @@ export function list(params) {
     params
   })
 }
+export function getContent(params) {
+  return request({
+    url: '/note/selectById',
+    method: 'get',
+    params
+  })
+}
