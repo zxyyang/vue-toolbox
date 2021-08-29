@@ -28,6 +28,7 @@ const downloadFile = (fileJson) => {
     downloadFile_txt_getUrl(url, name)
     return
   }
+
   if (url.indexOf('.bmp') !== -1 || url.indexOf('.jpg') !== -1 || url.indexOf('.png') !== -1 || url.indexOf('.tif') !== -1 || url.indexOf('.gif') !== -1 || url.indexOf('.psd') !== -1 || url.indexOf('.svg') !== -1) {
     console.log(name)
     downloadIamge(url, name)

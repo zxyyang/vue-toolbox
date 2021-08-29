@@ -13,34 +13,44 @@
           name="file"
           :multiple="true"
           action="/dev-api/cloudFile/upload"
-          :data="uploadData"
+          :data="{path: currentPath}"
           :beforeupload="uploadBeforeUpload"
           :show-upload-list="true"
           @change="uploadFileHandle"
         >
-          <a-button type="primary"> <a-icon type="upload" />上传 </a-button>
+          <a-button type="primary">
+            <a-icon type="upload" />
+            上传
+          </a-button>
         </a-upload>
         <a-button
-          :disabled="isDirDisable || multiDirDisable"
           @click="downloadFile"
         >
-          <a-icon type="download" />下载
+          <a-icon type="download" />
+          下载
+        </a-button>
+        <a-button @click="mkDirDialogVisible_fun">
+          <a-icon type="folder-add" />
+          新建文件夹
+        </a-button>
+        <a-button @click="deleteFile">
+          <a-icon type="delete" />
+          删除
         </a-button>
         <a-button>
-          <a-icon type="folder-add" />新建文件夹
-        </a-button>
-        <a-button> <a-icon type="delete" />删除 </a-button>
-        <a-button>
-          <a-icon type="block" />移动
+          <a-icon type="block" />
+          移动
         </a-button>
         <a-button
           :disabled="isDirDisable || multiDirDisable"
           @click="shareFile"
         >
-          <a-icon type="branches" />分享
+          <a-icon type="branches" />
+          分享
         </a-button>
         <a-button>
-          <a-icon type="delete" />清空回收站
+          <a-icon type="delete" />
+          清空回收站
         </a-button>
       </div>
       <div class="file_head_right" style="margin-left: 60vw;" />
@@ -51,7 +61,8 @@
           <a-button
             class="breadcrumb_but"
             type="link"
-          >{{ item }}</a-button>
+          >{{ item }}
+          </a-button>
         </a-breadcrumb-item>
       </a-breadcrumb>
     </div>
@@ -126,18 +137,22 @@
       v-model="uploadFileVisible"
       title="上传文件"
       :mask-closable="false"
-    >  <a-upload
-      class="upload_but"
-      name="file"
-      :multiple="true"
-      action="/dev-api/cloudFile/upload"
-      :data="uploadData"
-      :beforeupload="uploadBeforeUpload"
-      :show-upload-list="true"
-      @change="uploadFileHandle"
     >
-      <a-button type="primary"> <a-icon type="upload" />上传 </a-button>
-    </a-upload>
+      <a-upload
+        class="upload_but"
+        name="file"
+        :multiple="true"
+        action="/dev-api/cloudFile/upload"
+        :data="uploadData"
+        :beforeupload="uploadBeforeUpload"
+        :show-upload-list="true"
+        @change="uploadFileHandle"
+      >
+        <a-button type="primary">
+          <a-icon type="upload" />
+          上传
+        </a-button>
+      </a-upload>
 
     </a-modal>
 
@@ -159,19 +174,54 @@
       <img v-if="preViewType == 'img'" :src="previewSrc">
     </el-dialog>
     <a-modal
-            v-model="shareFileDialogVisible"
-            title="分享文件"
-            @ok="shareFileDialogVisible = flase"
-            okText="确定"
-            cancelText="取消"
-            :maskClosable="false"
+      v-model="mkdirDialogVisible"
+      title="新建文件夹"
+      ok-text="确定"
+      cancel-text="取消"
+      :mask-closable="false"
+      @ok="mkdir()"
+    >
+      <p>文件夹会建立在当前目录下</p>
+      <a-input
+        v-model="dirName"
+        class="mkdir_input"
+        placeholder="输入文件夹名称"
+      />
+    </a-modal>
+    <a-modal
+      v-model="deleteVisible"
+      title="删除文件"
+      ok-text="确定"
+      :mask-closable="false"
+      @ok="deleteVisible=false"
+    >
+      <a-table :data-source="deleteResultList">
+        <a-table-column key="name" title="文件名称" data-index="name">
+          <template slot-scope="name">
+            <span>{{ name }}</span>
+          </template>
+        </a-table-column>
+        <a-table-column key="result" title="删除结果" data-index="result">
+          <template slot-scope="result">
+            <span>{{ result }}</span>
+          </template>
+        </a-table-column>
+      </a-table>
+    </a-modal>
+    <a-modal
+      v-model="shareFileDialogVisible"
+      title="分享文件"
+      ok-text="确定"
+      cancel-text="取消"
+      :mask-closable="false"
+      @ok="shareFileDialogVisible = flase"
     >
       <a-spin tip="正在生成分享秘钥..." :spinning="share_loading">
         <span>分享类型：</span>
         <a-radio-group
-                default-value="private"
-                button-style="solid"
-                @change="shareTypeChange"
+          default-value="private"
+          button-style="solid"
+          @change="shareTypeChange"
         >
           <a-radio-button value="private">
             私密
@@ -180,26 +230,26 @@
             公开
           </a-radio-button>
         </a-radio-group>
-        <br />
+        <br>
         <div class="share_text">
           <span>文件秘钥：</span>
           <a-input
-                  class="share_input"
-                  v-model="shareKey"
-                  placeholder="秘钥"
-                  style="margin-top: 10px;"
+            v-model="shareKey"
+            class="share_input"
+            placeholder="秘钥"
+            style="margin-top: 10px;"
           >
             <a-tooltip slot="suffix" title="将这个发送给你的好友~">
               <a-icon type="info-circle" style="color: rgba(0,0,0,.45)" />
             </a-tooltip>
           </a-input>
-          <div class="share_private_pwd" v-if="shareIsPrivate">
+          <div v-if="shareIsPrivate" class="share_private_pwd">
             <span>提取密码：</span>
             <a-input
-                    class="share_input_pwd"
-                    v-model="sharePwd"
-                    placeholder="提取码"
-                    style="margin-top: 10px;"
+              v-model="sharePwd"
+              class="share_input_pwd"
+              placeholder="提取码"
+              style="margin-top: 10px;"
             />
           </div>
         </div>
@@ -210,14 +260,17 @@
 
 <script>
 import utils from '../../js/utils'
-import { list, uploadFiles, download } from '../../api/cloudDisk'
+import { download, list, makeDir, uploadFiles, deleteFile } from '../../api/cloudDisk'
+import ATableColumn from 'ant-design-vue/es/table/Column'
 
 export default {
 
   name: 'Files',
-  components: { },
+  components: { ATableColumn },
   data() {
     return {
+      deleteVisible: false,
+      mkdirDialogVisible: false,
       isDirDisable: false,
       multiDirDisable: false,
       shareFileDialogVisible: false,
@@ -229,40 +282,47 @@ export default {
       uploadData: {
         path: ''
       },
+      deleteResultList: [],
       filesList: [],
       skeleton_loading: false,
       selectedRowKeys: []
     }
   },
   watch: {
-    path: {
-      handler(newValue, oldValue) {
-        if (newValue[newValue.length - 1] === '搜索到的文件') {
-          return
-        }
-        let currentPath = ''
-        for (let i = 1; i < newValue.length; i++) {
-          currentPath += newValue[i] + '/'
-        }
-        // 此处理应使用 computed 去写..
-        // console.log(currentPath)
 
-        this.uploadData.path = '/' + currentPath
-        this.currentPath = '/' + currentPath
-        this.getFileList(this.currentPath)
-        this.selectedRowKeys = []
-      }
-    }
+    // path: {
+    //   handler(newValue, oldValue) {
+    //     if (newValue[newValue.length - 1] === '搜索到的文件') {
+    //       return
+    //     }
+    //     let currentPath = ''
+    //     for (let i = 1; i < newValue.length; i++) {
+    //       currentPath += newValue[i] + '/'
+    //     }
+    //     // 此处理应使用 computed 去写..
+    //     // console.log(currentPath)
+    //
+    //     this.uploadData.path = '/' + currentPath
+    //     this.currentPath = '/' + currentPath
+    //     this.getFileList(this.currentPath)
+    //     this.selectedRowKeys = []
+    //   }
+    // }
 
   },
 
-  created() { },
+  created() {
+  },
   mounted() {
     this.currentPath = '/'
     // 获取用户根目录内容
     this.getFileList(this.currentPath)
   },
   methods: {
+    // 显示新建文件夹
+    mkDirDialogVisible_fun() {
+      this.mkdirDialogVisible = true
+    },
     shareFile() {
       if (this.selectedRowKeys.length === 0) {
         return
@@ -281,6 +341,77 @@ export default {
         const data = res.data
         this.setFileList(data)
         this.skeleton_loading = false
+      })
+    },
+    // 创建文件夹
+    mkdir() {
+      const param = {
+        name: this.dirName + '/',
+        path: this.currentPath
+      }
+      makeDir(param).then(res => {
+        if (res.code === 200) {
+          this.$message.success('创建成功！')
+          this.dirName = ''
+          this.mkdirDialogVisible = false
+        } else {
+          this.$message.error('创建失败！')
+        }
+        this.getFileList(this.currentPath)
+      })
+    },
+    // 删除
+    deleteFile() {
+      if (this.selectedRowKeys.length === 0) {
+        this.$message.error('请选择需要删除的文件！')
+        return
+      }
+      this.$message.info('正在删除中..')
+      const taget = []
+      let skip = false
+      for (let i = 0; i < this.selectedRowKeys.length; i++) {
+        const temp = this.filesList[this.selectedRowKeys[i]].name
+        if (temp.substr(temp.length - 1) === '/') {
+          skip = true
+        }
+
+        taget.push(temp)
+      }
+      if (skip) {
+        this.$message.error('删除文件夹下所有内容正在开发中...')
+        // this.$confirm({
+        //   title: '你选择了文件夹，确定删除吗？',
+        //   content: '删除将导致目录下所有文件被删除。',
+        //   okText: '确定',
+        //   okType: 'danger',
+        //   cancelText: '取消',
+        //   onOk() {
+        //     _this.deleteFile_fun(taget)
+        //     return
+        //   },
+        //   onCancel() {
+        //     return
+        //   }
+        // })
+      } else {
+        this.deleteFile_fun(taget)
+      }
+    },
+    // deleteFile 方法需要处理相关事件，所以另外编写了 deleteFile_fun。
+    deleteFile_fun(taget) {
+      deleteFile(taget).then(res => {
+        if (res.code === 200) {
+          this.deleteResultList = this.deleteResultList.concat(res.data)
+
+          // 更新文件列表，也可以直接去删除 filelist.
+          this.getFileList(this.currentPath)
+          this.deleteVisible = true
+          // 更新文件选中列表.
+          this.selectedRowKeys = []
+          this.$emit('changeUploadList', '0')
+          return
+        }
+        this.$message.warning('未知错误。请刷新重试..')
       })
     },
     // 设置文件列表内容
@@ -317,16 +448,19 @@ export default {
     },
     // 下载文件
     downloadFile() {
-      const len = this.selectedRowKeys.length
-      if (len === 0 || len > 1) {
-        return
+      // const name = this.filesList[this.selectedRowKeys[0]].name
+      for (let i = 0; i < this.selectedRowKeys.length; i++) {
+        const name = this.filesList[this.selectedRowKeys[i]].name
+        if (name.charAt(name.length - 1) === '/') {
+          this.$message.error('不支持文件夹下载！')
+          return
+        }
+        download(name).then(res => {
+          const fileJson = res.data
+          this.downloadFile_fun(fileJson)
+        })
+        console.log(name)
       }
-      const path = this.filesList[this.selectedRowKeys[0]].name
-
-      download(path).then(res => {
-        const fileJson = res.data
-        this.downloadFile_fun(fileJson)
-      })
     },
     downloadFile_fun(fileJson) {
       utils.downloadFile(fileJson)
@@ -355,7 +489,7 @@ export default {
       if (name.charAt(name.length - 1) === '/') {
         return 'folder'
       }
-      if ((name.substr(name.indexOf('.') + 1)).indexOf('云端获取失败') != -1) {
+      if ((name.substr(name.indexOf('.') + 1)).indexOf('云端获取失败') !== -1) {
         return 'exception'
       }
       switch (name.substr(name.indexOf('.') + 1)) {
@@ -467,13 +601,13 @@ export default {
     },
     // 检查点击的是目录还是文件夹
     clickDir(name) {
-      // 当点击的是文件夹时
+      // 当点击的是文件夹时改变路径名字
 
-      const currentPath1 = this.currentPath + name
+      this.currentPath = this.currentPath + name
       // 清空当前选中的文件。
       this.selectedRowKeys = []
       // 获取新的文件
-      this.getFileList(currentPath1)
+      this.getFileList(this.currentPath)
     },
     clickFile(name) {
       // 当点击的是文件时
@@ -481,10 +615,10 @@ export default {
       this.previewSrc = ''
       if (
         type === 'jpg' ||
-              type === 'png' ||
-              type === 'bmp' ||
-              type === 'gif' ||
-              type === 'jpeg'
+                    type === 'png' ||
+                    type === 'bmp' ||
+                    type === 'gif' ||
+                    type === 'jpeg'
       ) {
         this.preViewType = 'img'
       } else if (type === 'txt') {
@@ -500,6 +634,7 @@ export default {
         if (this.preViewType === 'img') {
           this.previewSrc = url
         } else {
+          // eslint-disable-next-line no-const-assign
           url = url.substr(47)
           // eslint-disable-next-line no-undef
           Axios.get(url).then(ress => {
@@ -515,71 +650,83 @@ export default {
 }
 </script>
 <style scoped>
-.filesTable {
-  margin-top: 15px;
-}
-.breadcrumb_but {
-  margin: 0px;
-  padding: 0px;
-}
-.ant-btn-link {
-  color: black;
-}
-.upload_but {
-  margin-left: 10px;
-  /* float: left; */
-  margin-right: 5px;
-}
-.file_ico {
-  position: relative;
-  top: 3px;
-  font-size: 2.5rem;
-}
+    .filesTable {
+        margin-top: 15px;
+    }
 
-.moveFile_but {
-  margin-top: 15px;
-  margin-right: 5px;
-  width: 150px;
-}
-.ant-page-header {
-  border: 0px;
-}
-.ant-btn-link {
-  color: black;
-}
-.ant-divider-horizontal {
-  margin: 10px 0px;
-}
-.share_input {
-  margin-top: 10px;
-  max-width: 200px;
-}
-.share_input_pwd {
-  margin-top: 10px;
-  max-width: 100px;
-}
-.ant-table-body {
-  max-height: 70vh;
-  overflow: auto;
-}
+    .breadcrumb_but {
+        margin: 0px;
+        padding: 0px;
+    }
 
-.preView_diaglog .el-dialog__body {
-  padding: 0px;
-}
-.preView_diaglog .el-dialog__body iframe {
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-  border: 1px solid #606266;
-}
-.preView_diaglog .el-dialog__body img {
-  width: 100%;
-}
+    .ant-btn-link {
+        color: black;
+    }
 
-div.popContainer {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.3);
-}
+    .upload_but {
+        margin-left: 10px;
+        /* float: left; */
+        margin-right: 5px;
+    }
+
+    .file_ico {
+        position: relative;
+        top: 3px;
+        font-size: 2.5rem;
+    }
+
+    .moveFile_but {
+        margin-top: 15px;
+        margin-right: 5px;
+        width: 150px;
+    }
+
+    .ant-page-header {
+        border: 0px;
+    }
+
+    .ant-btn-link {
+        color: black;
+    }
+
+    .ant-divider-horizontal {
+        margin: 10px 0px;
+    }
+
+    .share_input {
+        margin-top: 10px;
+        max-width: 200px;
+    }
+
+    .share_input_pwd {
+        margin-top: 10px;
+        max-width: 100px;
+    }
+
+    .ant-table-body {
+        max-height: 70vh;
+        overflow: auto;
+    }
+
+    .preView_diaglog .el-dialog__body {
+        padding: 0px;
+    }
+
+    .preView_diaglog .el-dialog__body iframe {
+        box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+        border: 1px solid #606266;
+    }
+
+    .preView_diaglog .el-dialog__body img {
+        width: 100%;
+    }
+
+    div.popContainer {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.3);
+    }
 </style>

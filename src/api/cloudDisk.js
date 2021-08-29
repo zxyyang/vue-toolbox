@@ -25,4 +25,21 @@ export function download(params) {
     params: param
   })
 }
+export function makeDir(params) {
+  return request({
+    url: '/cloudFile/makeDir',
+    method: 'post',
+    params
+  })
+}
+export function deleteFile(params) {
+  const param = {
+    name: params.join(',')
+  }
+  return request({
+    url: '/cloudFile/batchDelete',
+    method: 'post',
+    params: param
+  })
+}
 
