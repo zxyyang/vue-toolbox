@@ -27,35 +27,15 @@
         <!--            </el-form>-->
         <!--          </template>-->
         <!--        </el-table-column>-->
-        <el-table-column label="内容" align="center" type="expand">
-          <template slot-scope="{ row }">
-            <div
-              id="content"
-              style="
-              overflow: hidden;
-              text-overflow: ellipsis;
-              white-space: nowrap;
-              width: 100%;
-              /*height: 34px;*/
-              text-align: center;
-            "
-              v-html="row.noteContent"
-            />
-          </template>
-        </el-table-column>
+
         <el-table-column
           prop="noteName"
           label="笔记名称"
           width="180"
         />
         <el-table-column
-          prop="noteContent1"
-          label="内容"
-          width="180"
-        />
-        <el-table-column
           prop="noteRemark"
-          label="备注"
+          label="简介"
         />
         <el-table-column
           prop="noteType"
