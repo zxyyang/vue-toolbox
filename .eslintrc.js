@@ -14,6 +14,8 @@ module.exports = {
     // add your custom rules here
     //it is base on https://github.com/vuejs/eslint-config-vue
     rules: {
+        camelcase: 'off',
+        '@typescript-eslint/camelcase': 0,
         "vue/max-attributes-per-line": [2, {
             "singleline": 10,
             "multiline": {
@@ -33,9 +35,6 @@ module.exports = {
         'block-spacing': [2, 'always'],
         'brace-style': [2, '1tbs', {
             'allowSingleLine': true
-        }],
-        'camelcase': [0, {
-            'properties': 'always'
         }],
         'comma-dangle': [2, 'never'],
         'comma-spacing': [2, {

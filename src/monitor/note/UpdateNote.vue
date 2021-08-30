@@ -2,8 +2,8 @@
   <div>
     <a-page-header
       style="border: 1px solid rgb(235, 237, 240)"
-      title="New "
-      sub-title=" Enter notes"
+      title="Edit "
+      sub-title=" Update notes"
       @back=" $router.push('/note')"
     > <template slot="extra">
       <a-button>
@@ -25,7 +25,7 @@
 
 <script>
 export default {
-  name: 'AddNote',
+  name: 'UpdateNote',
   data: function() {
     return {
       return: {
@@ -98,18 +98,18 @@ export default {
 /*github使用的是这个   根据自己的进行调整*/
 /*.markdown-body {*/
 /*  height: 3000px;*/
-/*  box-sizing: border-box;*/
-/*  min-width: 200px;*/
-/*   max-width: 980px;*/
-/*   padding: 45px;*/
-/*  max-width: 98%;*/
-/*  margin: 0 auto;*/
-/*  box-shadow: 2px 4px 6px gray;*/
-/*  padding-left: 20px;*/
-/*  padding-right: 15px;*/
-/*  padding-top: 40px;*/
-/*  padding-bottom: 45px;*/
-/*  margin-bottom: 100px*/
+/*  !*box-sizing: border-box;*!*/
+/*  !*min-width: 200px;*!*/
+/*  !* max-width: 980px;*!*/
+/*  !* padding: 45px;*!*/
+/*  !*max-width: 98%;*!*/
+/*  !*margin: 0 auto;*!*/
+/*  !*box-shadow: 2px 4px 6px gray;*!*/
+/*  !*padding-left: 20px;*!*/
+/*  !*padding-right: 15px;*!*/
+/*  !*padding-top: 40px;*!*/
+/*  !*padding-bottom: 45px;*!*/
+/*  !*margin-bottom: 100px*!*/
 /*}*/
 
 /*//这个要配合移动端 不是很理解*/

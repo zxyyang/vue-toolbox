@@ -1,4 +1,8 @@
-<template />
+<template>
+  <div>
+    <span>Task</span>
+  </div>
+</template>
 <script>
 export default {
   name: 'Task',

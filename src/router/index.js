@@ -7,6 +7,7 @@ import Task from '../monitor/task/Task'
 import Login from '@/monitor/login/Login'
 import CloudDisk from '@/monitor/cloudDisk/CloudDisk'
 import AddNote from '@/monitor/note/AddNote'
+import UpdateNote from '@/monitor/note/UpdateNote'
 Vue.use(Router)
 // 创建路由对象并配置路由
 const originalPush = Router.prototype.push
@@ -29,6 +30,10 @@ const router = new Router({
         {
           path: '/addNote',
           component: AddNote
+        },
+        {
+          path: '/updateNote',
+          component: UpdateNote
         },
         {
           path: '/index',
