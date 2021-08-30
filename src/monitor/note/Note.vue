@@ -124,7 +124,6 @@ export default {
   name: 'Note',
   data() {
     return {
-
       visible: false,
       placement: 'top',
       pageInfo: {
@@ -160,6 +159,7 @@ export default {
   destroyed() {
   },
   methods: {
+
     showDrawer(ras) {
       this.visible = true
     },
