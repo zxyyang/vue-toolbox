@@ -11,8 +11,8 @@ import 'ant-design-vue/dist/antd.css'
 
 Vue.config.productionTip = false
 Vue.use(mavonEditor)
-Vue.use(ElementUI)
 Vue.use(Antd)
+Vue.use(ElementUI)
 new Vue({
   el: '#app',
   components: { App },

@@ -4,8 +4,10 @@
     <div class="file_head">
       <div class="file_head_left" style="float:left ;margin-bottom: 25px">
         <a-input-search
+          v-model="searchFileText"
           placeholder="搜索文件"
           style="width: 200px"
+          @search="searchFile"
         />
         <!--        上传文件，以及上传的端口填写位置-->
         <a-upload
@@ -56,17 +58,20 @@
       <div class="file_head_right" style="margin-left: 60vw;" />
       <br><br>
       <a-divider />
-      <a-breadcrumb style="margin: 16px 0">
+      <!--      目录结构面包屑-->
+      <a-breadcrumb style="margin: 16px 0 ;margin-left: 15px; ">
         <a-breadcrumb-item v-for="(item, index) in path" :key="index">
           <a-button
+            style="font-weight: 500;font-size: 15px"
             class="breadcrumb_but"
             type="link"
-          >{{ item }}
-          </a-button>
+            @click="clickBreadcrumb(index)"
+          >{{ item }}</a-button>
         </a-breadcrumb-item>
       </a-breadcrumb>
     </div>
     <div class="table">
+
       <a-table
         class="filesTable"
         :data-source="filesList"
@@ -85,13 +90,14 @@
               <a-button
                 type="link"
                 @click="
-                  if (name.substr(name.length - 1) == '/') {
+                  if (name.substr(name.length - 1) === '/') {
                     clickDir(name)
                   } else {
                     clickFile(name)
                   }
                 "
-              >{{ name }}</a-button>
+              >{{ name.replace(/\/$/, '') }}</a-button>
+              <!--              name.charAt(name.length-1)=== '/' ? name.replace('/',''): name-->
             </span>
           </template>
         </a-table-column>
@@ -260,15 +266,17 @@
 
 <script>
 import utils from '../../js/utils'
-import { download, list, makeDir, uploadFiles, deleteFile } from '../../api/cloudDisk'
+import { download, list, makeDir, uploadFiles, deleteFile, selectByName } from '../../api/cloudDisk'
 import ATableColumn from 'ant-design-vue/es/table/Column'
 
 export default {
-
   name: 'Files',
   components: { ATableColumn },
+  props: ['mess'],
   data() {
     return {
+      path: ['根目录'],
+      searchFileText: '',
       deleteVisible: false,
       mkdirDialogVisible: false,
       isDirDisable: false,
@@ -290,24 +298,24 @@ export default {
   },
   watch: {
 
-    // path: {
-    //   handler(newValue, oldValue) {
-    //     if (newValue[newValue.length - 1] === '搜索到的文件') {
-    //       return
-    //     }
-    //     let currentPath = ''
-    //     for (let i = 1; i < newValue.length; i++) {
-    //       currentPath += newValue[i] + '/'
-    //     }
-    //     // 此处理应使用 computed 去写..
-    //     // console.log(currentPath)
-    //
-    //     this.uploadData.path = '/' + currentPath
-    //     this.currentPath = '/' + currentPath
-    //     this.getFileList(this.currentPath)
-    //     this.selectedRowKeys = []
-    //   }
-    // }
+    path: {
+      handler(newValue, oldValue) {
+        if (newValue[newValue.length - 1] === '搜索到的文件') {
+          return
+        }
+        let currentPath = ''
+        for (let i = 1; i < newValue.length; i++) {
+          currentPath += newValue[i] + '/'
+        }
+        // 此处理应使用 computed 去写..
+        console.log(currentPath)
+
+        this.uploadData.path = '/' + currentPath
+        this.currentPath = '/' + currentPath
+        this.getFileList(this.currentPath)
+        this.selectedRowKeys = []
+      }
+    }
 
   },
 
@@ -319,6 +327,13 @@ export default {
     this.getFileList(this.currentPath)
   },
   methods: {
+    // 目录面包屑
+    clickBreadcrumb(index) {
+      if (this.path[index] === '搜索到的文件') {
+        return
+      }
+      this.path.splice(index + 1, this.path.length + 1)
+    },
     // 显示新建文件夹
     mkDirDialogVisible_fun() {
       this.mkdirDialogVisible = true
@@ -444,6 +459,19 @@ export default {
       }
       uploadFiles(param).then(res => {
         this.getFileList()
+      })
+    },
+    // 搜索
+    searchFile() {
+      const name = this.searchFileText
+      if (name.trim().length === 0) {
+        this.$message.warning('搜索内容不得为空！')
+        return
+      }
+      selectByName({ name: name }).then(res => {
+        this.setFileList(res.data)
+        this.path.splice(1, this.path.length)
+        this.path.push('搜索到的文件')
       })
     },
     // 下载文件
@@ -602,7 +630,7 @@ export default {
     // 检查点击的是目录还是文件夹
     clickDir(name) {
       // 当点击的是文件夹时改变路径名字
-
+      this.path.push(name.substr(0, name.length - 1))
       this.currentPath = this.currentPath + name
       // 清空当前选中的文件。
       this.selectedRowKeys = []

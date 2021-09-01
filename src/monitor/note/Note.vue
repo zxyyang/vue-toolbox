@@ -5,15 +5,16 @@
       <a-space style="margin-left: 20px">
         <a-input-search
           v-model:value="searchValue"
-          placeholder="input search text"
+          placeholder="input search note name"
           style="width: 200px"
           @search="onSearch"
         />
         <a-button @click="$router.push('/addNote')">新建笔记</a-button>
-        <a-button type="danger" @click="batchDelet">删除</a-button>
+        <el-button type="danger" size="small" @click="batchRemove">删除</el-button>
       </a-space>
     </div>
     <div class="tablediv">
+
       <el-table
         ref="multipleTable"
         tooltip-effect="dark"
@@ -22,7 +23,8 @@
         :data="pageInfo.list"
         style="width: 100%; "
         :default-sort="{prop: 'date', order: 'descending'}"
-        @selection-change="handleSelectionChange"
+        row-key="id"
+        @selection-change="checkedChange"
       >
         <el-table-column
           type="selection"
@@ -115,7 +117,8 @@
 </template>
 
 <script>
-import { list, getContent, selectByName } from '@/api/note'
+
+import { list, getContent, selectByName, deleteNote } from '@/api/note'
 import marked from 'marked'
 import hljs from 'highlight.js'
 import 'highlight.js/styles/monokai-sublime.css'
@@ -125,6 +128,7 @@ export default {
   name: 'Note',
   data() {
     return {
+      sels: [], // 列表选中的选项
       searchValue: '',
       ContentValue: '',
       loading: false,
@@ -167,6 +171,32 @@ export default {
   destroyed() {
   },
   methods: {
+    // 删除
+    batchRemove() {
+      this.setVisible = true
+      // eslint-disable-next-line no-unused-vars
+      const vm = this
+      const ids = this.sels.map(item => item.id).join(',')
+      if (this.sels.length === 0) {
+        this.$message.warn('请选择内容')
+        return
+      }
+      this.$confirm('确认删除选中记录？', '提示', {
+        type: 'warning'
+      }).then(() => {
+        this.listLoading = true
+        console.log(ids)
+        deleteNote({ ids: ids }).then(res => {
+          // eslint-disable-next-line no-cond-assign,no-constant-condition
+          if (res.code === 200) {
+            this.$message.success(res.msg)
+          } else {
+            this.$message.error(res.msg)
+          }
+          this.getData()
+        })
+      }).catch(() => {})
+    },
     // 搜索
     onSearch() {
       const param = {
@@ -183,9 +213,6 @@ export default {
           this.$message.error(res.msg)
         }
       })
-    },
-    formatter(row, column) {
-      return row.address
     },
     // 关闭预览模式
     closeContent() {
@@ -228,7 +255,12 @@ export default {
     handleCurrentChange(val) {
       this.pageNumber = val
       this.getData(val)
+    },
+    // 多选
+    checkedChange(sels) {
+      this.sels = sels
     }
+
   }
 
 }

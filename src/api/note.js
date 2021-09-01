@@ -39,3 +39,10 @@ export function selectByName(params) {
     params
   })
 }
+export function deleteNote(params) {
+  return request({
+    url: '/note/delete',
+    method: 'post',
+    params
+  })
+}
