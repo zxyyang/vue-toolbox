@@ -1,19 +1,26 @@
 <template>
-  <div>
+  <div v-if="isDataOk">
     <a-page-header
       style="border: 1px solid rgb(235, 237, 240)"
       title="Edit "
       sub-title=" Update notes"
       @back=" $router.push('/note')"
-    > <template slot="extra">
-      <a-button>
-        Submit
-      </a-button>
-    </template>
+    >
+      <template slot="extra">
+        <a-input v-model="noteName" placeholder="Name" style="width: 200px" />
+        <a-input v-model="noteRemark" placeholder="Remark" style="width: 200px" />
+        <a-input v-model="noteType" placeholder="Type" style="width: 120px" />
+      </template>
+      <template slot="extra">
+
+        <a-button @click="updateNote">
+          Submit
+        </a-button>
+      </template>
     </a-page-header>
     <mavon-editor
       ref="md"
-      v-model="value"
+      v-model="value "
       :toolbars="toolbars"
       style="height: 730px"
       @imgAdd="handleEditorImgAdd"
@@ -24,51 +31,94 @@
 </template>
 
 <script>
+
+import { getContent, update } from '@/api/note'
+
 export default {
   name: 'UpdateNote',
-  data: function() {
+  data() {
     return {
-      return: {
-        toolbars: {
-          bold: true, // 粗体
-          italic: true, // 斜体
-          header: true, // 标题
-          underline: true, // 下划线
-          strikethrough: true, // 中划线
-          mark: true, // 标记
-          superscript: true, // 上角标
-          subscript: true, // 下角标
-          quote: true, // 引用
-          ol: true, // 有序列表
-          ul: true, // 无序列表
-          link: true, // 链接
-          imagelink: true, // 图片链接
-          code: false, // code
-          table: true, // 表格
-          fullscreen: true, // 全屏编辑
-          readmodel: true, // 沉浸式阅读
-          htmlcode: true, // 展示html源码
-          help: true, // 帮助
-          /* 1.3.5 */
-          undo: true, // 上一步
-          redo: true, // 下一步
-          trash: true, // 清空
-          save: true, // 保存（触发events中的save事件）
-          /* 1.4.2 */
-          navigation: true, // 导航目录
-          /* 2.1.8 */
-          alignleft: true, // 左对齐
-          aligncenter: true, // 居中
-          alignright: true, // 右对齐
-          /* 2.2.1 */
-          subfield: true, // 单双栏模式
-          preview: true // 预览
-        }
+      id: '',
+      noteName: '',
+      noteRemark: '',
+      noteType: '',
+      isDataOk: false,
+      toolbars: {
+        bold: true, // 粗体
+        italic: true, // 斜体
+        header: true, // 标题
+        underline: true, // 下划线
+        strikethrough: true, // 中划线
+        mark: true, // 标记
+        superscript: true, // 上角标
+        subscript: true, // 下角标
+        quote: true, // 引用
+        ol: true, // 有序列表
+        ul: true, // 无序列表
+        link: true, // 链接
+        imagelink: true, // 图片链接
+        code: false, // code
+        table: true, // 表格
+        fullscreen: true, // 全屏编辑
+        readmodel: true, // 沉浸式阅读
+        htmlcode: true, // 展示html源码
+        help: true, // 帮助
+        /* 1.3.5 */
+        undo: true, // 上一步
+        redo: true, // 下一步
+        trash: true, // 清空
+        save: true, // 保存（触发events中的save事件）
+        /* 1.4.2 */
+        navigation: true, // 导航目录
+        /* 2.1.8 */
+        alignleft: true, // 左对齐
+        aligncenter: true, // 居中
+        alignright: true, // 右对齐
+        /* 2.2.1 */
+        subfield: true, // 单双栏模式
+        preview: true // 预览
       }
     }
   },
-  methods: {
+  created() {
+    var id = this.$route.query.id
 
+    getContent(id).then(res => {
+      // 初始化
+      if (res.code === 500) {
+        this.$message.error('获取失败')
+      }
+      return res.data
+    }).then(ras => {
+      this.id = ras.id
+      this.value = ras.noteContent
+      this.noteName = ras.noteName
+      this.noteRemark = ras.noteRemark
+      this.noteType = ras.noteType
+      this.isDataOk = true
+    })
+  },
+  mounted() {
+
+  },
+  methods: {
+    // 修改
+    updateNote() {
+      const param = {
+        id: this.id,
+        noteName: this.noteName,
+        noteRemark: this.noteRemark,
+        noteType: this.noteType,
+        noteContent: this.noteContent
+      }
+      console.log('变量数据：' + param)
+      update(param).then(res => {
+        if (res.code === 200) {
+          this.$message.success(res.msg)
+          this.$router.push('/note')
+        }
+      })
+    },
     // 监听markdown变化
     change(value, render) {
       this.html = render

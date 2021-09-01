@@ -5,11 +5,17 @@
       title="New "
       sub-title=" Enter notes"
       @back=" $router.push('/note')"
-    > <template slot="extra">
-      <a-button>
-        Submit
-      </a-button>
-    </template>
+    >
+      <template slot="extra">
+        <a-input v-model="noteName" placeholder="Name" style="width: 200px" />
+        <a-input v-model="noteRemark" placeholder="Remark" style="width: 200px" />
+        <a-input v-model="noteType" placeholder="Type" style="width: 120px" />
+      </template>
+      <template slot="extra">
+        <a-button @click="addNote">
+          Submit
+        </a-button>
+      </template>
     </a-page-header>
     <mavon-editor
       ref="md"
@@ -24,51 +30,71 @@
 </template>
 
 <script>
+import { add } from '@/api/note'
+
 export default {
   name: 'AddNote',
-  data: function() {
+  data() {
     return {
-      return: {
-        toolbars: {
-          bold: true, // 粗体
-          italic: true, // 斜体
-          header: true, // 标题
-          underline: true, // 下划线
-          strikethrough: true, // 中划线
-          mark: true, // 标记
-          superscript: true, // 上角标
-          subscript: true, // 下角标
-          quote: true, // 引用
-          ol: true, // 有序列表
-          ul: true, // 无序列表
-          link: true, // 链接
-          imagelink: true, // 图片链接
-          code: false, // code
-          table: true, // 表格
-          fullscreen: true, // 全屏编辑
-          readmodel: true, // 沉浸式阅读
-          htmlcode: true, // 展示html源码
-          help: true, // 帮助
-          /* 1.3.5 */
-          undo: true, // 上一步
-          redo: true, // 下一步
-          trash: true, // 清空
-          save: true, // 保存（触发events中的save事件）
-          /* 1.4.2 */
-          navigation: true, // 导航目录
-          /* 2.1.8 */
-          alignleft: true, // 左对齐
-          aligncenter: true, // 居中
-          alignright: true, // 右对齐
-          /* 2.2.1 */
-          subfield: true, // 单双栏模式
-          preview: true // 预览
-        }
+      noteName: '',
+      noteType: '',
+      noteRemark: '',
+      toolbars: {
+        bold: true, // 粗体
+        italic: true, // 斜体
+        header: true, // 标题
+        underline: true, // 下划线
+        strikethrough: true, // 中划线
+        mark: true, // 标记
+        superscript: true, // 上角标
+        subscript: true, // 下角标
+        quote: true, // 引用
+        ol: true, // 有序列表
+        ul: true, // 无序列表
+        link: true, // 链接
+        imagelink: true, // 图片链接
+        code: false, // code
+        table: true, // 表格
+        fullscreen: true, // 全屏编辑
+        readmodel: true, // 沉浸式阅读
+        htmlcode: true, // 展示html源码
+        help: true, // 帮助
+        /* 1.3.5 */
+        undo: true, // 上一步
+        redo: true, // 下一步
+        trash: true, // 清空
+        save: true, // 保存（触发events中的save事件）
+        /* 1.4.2 */
+        navigation: true, // 导航目录
+        /* 2.1.8 */
+        alignleft: true, // 左对齐
+        aligncenter: true, // 居中
+        alignright: true, // 右对齐
+        /* 2.2.1 */
+        subfield: true, // 单双栏模式
+        preview: true // 预览
       }
     }
   },
   methods: {
-
+    // 提交数据
+    addNote() {
+      const param = {
+        noteName: this.noteName,
+        noteRemark: this.noteRemark,
+        noteType: this.noteType,
+        noteContent: this.value
+      }
+      console.log(param)
+      add(param).then(res => {
+        if (res.code === 200) {
+          this.$message.success(res.msg)
+          this.$router.push('/note')
+        } else {
+          this.$message.error(res.msg)
+        }
+      })
+    },
     // 监听markdown变化
     change(value, render) {
       this.html = render

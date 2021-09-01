@@ -5,7 +5,7 @@
       <el-row type="flex" justify="center">
         <el-col :span="6" />
         <el-col :span="6">
-          <div class="head" style=" display: flex;justify-content: center;align-items: center;">
+          <div class="head" style="margin-left: 110px">
             <h1>
               To The Moon
               <svg width="200" height="36" viewBox="0 0 200 41" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -16,18 +16,18 @@
           <div class="border">
             <el-form ref="form" :model="form" class="login" label-width="100px">
               <el-form-item
-                label="UserName:"
+                label="userName:"
                 class="text1"
                 style="text-align: left;margin-left: 60px;font-color: #FFFFFF"
               >
                 <el-input
                   v-model="form.userName"
-                  placeholder="Please input UserName"
+                  placeholder="Please input userName"
                   clearable
                   style="width: 70%"
                 />
               </el-form-item>
-              <el-form-item label="Password:" style="text-align: left;margin-left: 60px;color: #FFFFFF">
+              <el-form-item label="password:" style="text-align: left;margin-left: 60px;color: #FFFFFF">
                 <el-input
                   v-model="form.password"
                   style="width: 70%;"
@@ -36,9 +36,9 @@
                 />
               </el-form-item>
 
-              <div style="text-align:center">
-                <el-button class="but1" style="margin-right: 0px" @click="onSubmit">LogIn</el-button>
-
+              <div style="text-align:center; margin-top: 40px">
+                <el-button class="but1" style="margin-left: 100px;width: 100px" @click="onSubmit">LogIn</el-button>
+                <el-button style="margin-right: 100px;margin-left: 50px;width: 100px" @click="onTest">Test</el-button>
               </div>
             </el-form>
           </div>
@@ -77,16 +77,30 @@ export default {
 
   },
   methods: {
-
-    onSubmit() {
-      login(this.form).then(res => {
-        console.log(res.data)
+    onTest() {
+      const param = {
+        userName: 'test',
+        password: 'test'
+      }
+      login(param).then(res => {
         if (res.code === 200) {
-          this.$message.success('登录成功！')
-          sessionStorage.setItem('userName', this.form.userName)
+          this.$message.success(res.msg)
+          sessionStorage.setItem('userName', 'test'
+          )
           this.$router.push('/index')
         } else {
-          this.$message.error('账号或密码错误！')
+          this.$message.error(res.msg)
+        }
+      })
+    },
+    onSubmit() {
+      login(this.form).then(res => {
+        if (res.code === 200) {
+          this.$message.success(res.msg)
+          sessionStorage.setItem('userName', this.form.UserName)
+          this.$router.push('/index')
+        } else {
+          this.$message.error(res.msg)
         }
       })
     }
@@ -138,8 +152,9 @@ export default {
         white-space:nowrap;
     }
     .border{
-        size:50px;
-        background-color: #313132;
+      height: 240px;
+      width: 420px;
+        background-color: #212121;
         border-radius: 15px;
         /* box-shadow: 10px 10px 30px rgba(0, 0, 0, 100), 0 0 6px rgba(255, 255, 255, .100);*/
         /*  box-shadow: 10px 10px 60px #C944FF,-30px -30px 60px #F93979;*/

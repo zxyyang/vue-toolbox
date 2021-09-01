@@ -2,91 +2,70 @@
   <div>
 
     <div style="margin-top: 10px;margin-bottom: 10px">
-      <a-space>
+      <a-space style="margin-left: 20px">
         <a-input-search
-          v-model:value="value"
-          placeholder="input search text"
+          v-model:value="searchValue"
+          placeholder="input search note name"
           style="width: 200px"
           @search="onSearch"
         />
         <a-button @click="$router.push('/addNote')">新建笔记</a-button>
+        <el-button type="danger" size="small" @click="batchRemove">删除</el-button>
       </a-space>
     </div>
     <div class="tablediv">
-      <el-table
-        class="table"
-        :data="pageInfo.list"
-        style="width: 100%"
-      >
-        <!--        <el-table-column type="expand">-->
-        <!--          <template slot-scope="props">-->
-        <!--            <el-form label-position="left" inline class="demo-table-expand">-->
-        <!--              <el-form-item>-->
-        <!--                <span>{{ props.row.noteContent }}</span>-->
-        <!--              </el-form-item>-->
-        <!--            </el-form>-->
-        <!--          </template>-->
-        <!--        </el-table-column>-->
 
+      <el-table
+        ref="multipleTable"
+        tooltip-effect="dark"
+        class="table"
+        :align="center"
+        :data="pageInfo.list"
+        style="width: 100%; "
+        :default-sort="{prop: 'date', order: 'descending'}"
+        row-key="id"
+        @selection-change="checkedChange"
+      >
+        <el-table-column
+          type="selection"
+          width="140"
+          align="center"
+        />
         <el-table-column
           prop="noteName"
           label="笔记名称"
-          width="180"
         />
         <el-table-column
           prop="noteRemark"
-          label="简介"
+          label="备注"
         />
+
         <el-table-column
           prop="noteType"
           label="类型"
+          width="250"
+          align="center"
         />
         <el-table-column
+          sortable
           prop="noteTime"
           label="时间"
+          width="300"
+          align="center"
         />
         <el-table-column
           fixed="right"
           label="操作"
-          width="100"
+          width="200"
+          align="center"
         >
           <template slot-scope="scope">
             <el-button type="text" size="small" @click="showContent(scope.row)">查看</el-button>
-            <el-button type="text" size="small">编辑</el-button>
+            <el-button type="text" size="small" @click="editeContent(scope.row)">编辑</el-button>
           </template>
         </el-table-column>
       </el-table>
 
-      <!--      笔记内容抽屉-->
-      <div>
-        <a-drawer
-          title="contens"
-          :placement="placement"
-          :closable="false"
-          :visible="visible"
-          :data="content"
-          @close="onClose"
-        >
-          <el-table style="width: 100%" class="table1">
-            <el-table-column label="内容" align="center">
-              <template slot-scope="{ row }">
-                <div
-                  id="content1"
-                  style="
-              overflow: hidden;
-              text-overflow: ellipsis;
-              white-space: nowrap;
-              width: 100%;
-              /*height: 34px;*/
-              text-align: center;
-            "
-                  v-html="row.contents"
-                />
-              </template>
-            </el-table-column>
-          </el-table>
-        </a-drawer>
-      </div>
       <!--    分页-->
 
       <el-pagination
@@ -102,10 +81,10 @@
 
       <!--      浏览笔记内容-->
 
-      <div v-if="contentVisible" class="popContainer" @click="contentVisible = false">
-
+      <div v-if="contentVisible" class="popContainer">
         <mavon-editor
-          v-model="Contentvalue"
+          v-model="ContentValue"
+          v-loading="loading"
           class="md"
           :subfield="false"
           :default-open="'preview'"
@@ -113,7 +92,7 @@
           :scroll-style="true"
           :ishljs="true"
           :toolbars="toolbars"
-          style="height: 96% ;width: 98%;justify-content: center"
+          style="height: 96% ;width: 98%;justify-content: center ; "
         >
           <template #right-toolbar-after>
             <button
@@ -138,7 +117,8 @@
 </template>
 
 <script>
-import { list } from '@/api/note'
+
+import { list, getContent, selectByName, deleteNote } from '@/api/note'
 import marked from 'marked'
 import hljs from 'highlight.js'
 import 'highlight.js/styles/monokai-sublime.css'
@@ -148,7 +128,10 @@ export default {
   name: 'Note',
   data() {
     return {
-      Contentvalue: {},
+      sels: [], // 列表选中的选项
+      searchValue: '',
+      ContentValue: '',
+      loading: false,
       contentVisible: false,
       placement: 'top',
       pageInfo: {
@@ -158,7 +141,7 @@ export default {
       pageSize: 10,
       currentPage: 1,
       toolbars: {
-
+        navigation: true,
         readmodel: true // 沉浸式阅读
 
       }
@@ -166,35 +149,6 @@ export default {
     }
   },
   created() {
-    this.Contentvalue = '# 这是一级标题\n' +
-        '## 这是二级标题\n' +
-        '### 这是三级标题\n' +
-        '#### 这是四级标题\n' +
-        '##### 这是五级标题\n' +
-        '###### 这是六级标题' +
-        '**这是加粗的文字**\n' +
-        '*这是倾斜的文字*`\n' +
-        '***这是斜体加粗的文字***\n' +
-        '~~这是加删除线的文字~~' +
-        '>这是引用的内容\n' +
-        '>>这是引用的内容\n' +
-        '>>>>>>>>>>这是引用的内容' +
-        '表头|表头|表头\n' +
-        '---|:--:|---:\n' +
-        '内容|内容|内容\n' +
-        '内容|内容|内容\n' +
-        '\n' +
-        '第二行分割表头和内容。\n' +
-        '- 有一个就行，为了对齐，多加了几个\n' +
-        '文字默认居左\n' +
-        '-两边加：表示文字居中\n' +
-        '-右边加：表示文字居右\n' +
-        '注：原生的语法两边都要用 | 包起来。此处省略' +
-        '(```java  )\n' +
-        '  \tif (zoneName.equals("zone0")) {\n' +
-        '  } else if (zoneName.equals("zone2")) {' +
-        '  private QiNiuConfig() {' +
-        '(```)'
   },
   mounted() {
     this.getData()
@@ -217,13 +171,70 @@ export default {
   destroyed() {
   },
   methods: {
+    // 删除
+    batchRemove() {
+      this.setVisible = true
+      // eslint-disable-next-line no-unused-vars
+      const vm = this
+      const ids = this.sels.map(item => item.id).join(',')
+      if (this.sels.length === 0) {
+        this.$message.warn('请选择内容')
+        return
+      }
+      this.$confirm('确认删除选中记录？', '提示', {
+        type: 'warning'
+      }).then(() => {
+        this.listLoading = true
+        console.log(ids)
+        deleteNote({ ids: ids }).then(res => {
+          // eslint-disable-next-line no-cond-assign,no-constant-condition
+          if (res.code === 200) {
+            this.$message.success(res.msg)
+          } else {
+            this.$message.error(res.msg)
+          }
+          this.getData()
+        })
+      }).catch(() => {})
+    },
+    // 搜索
+    onSearch() {
+      const param = {
+        pageNumber: this.pageNumber,
+        pageSize: this.pageSize,
+        noteName: this.searchValue
+      }
+
+      selectByName(param).then(res => {
+        if (res.code === 200) {
+          this.pageInfo = res.data
+          this.total = res.data.total
+        } else {
+          this.$message.error(res.msg)
+        }
+      })
+    },
     // 关闭预览模式
     closeContent() {
       this.contentVisible = false
+      this.ContentValue = ''
+    },
+    // 显示编辑笔记
+    editeContent(row) {
+      this.$router.push({ path: '/updateNote',
+        query: {
+          id: row.id
+        }
+      })
     },
     // 显示笔记内容
     showContent(row) {
       this.contentVisible = true
+      this.loading = true
+      getContent(row.id).then(res => {
+        this.ContentValue = res.data.noteContent
+        this.loading = false
+      })
     },
     getData() {
       const param = {
@@ -244,7 +255,12 @@ export default {
     handleCurrentChange(val) {
       this.pageNumber = val
       this.getData(val)
+    },
+    // 多选
+    checkedChange(sels) {
+      this.sels = sels
     }
+
   }
 
 }
@@ -252,9 +268,7 @@ export default {
 </script>
 
 <style scoped>
-.table{
-  background-color: #212121 !important;
-}
+
 div.popContainer{
   -webkit-align-items: center;
   display: flex;
@@ -266,7 +280,9 @@ div.popContainer{
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(224, 15, 15, 0.3);
+  background: rgba(17, 17, 17, 0.4);
 }
-
+.header-row-style{
+  background-color: red;
+}
 </style>

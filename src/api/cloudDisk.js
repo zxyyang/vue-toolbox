@@ -42,4 +42,10 @@ export function deleteFile(params) {
     params: param
   })
 }
-
+export function selectByName(params) {
+  return request({
+    url: '/cloudFile/selectByName',
+    method: 'GET',
+    params
+  })
+}
