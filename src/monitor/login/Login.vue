@@ -85,8 +85,8 @@ export default {
       login(param).then(res => {
         if (res.code === 200) {
           this.$message.success(res.msg)
-          sessionStorage.setItem('userName', 'test'
-          )
+          localStorage.setItem('token', 'tokencontent')// 保存token
+          sessionStorage.setItem('userName', '测试账号')
           this.$router.push('/index')
         } else {
           this.$message.error(res.msg)
@@ -96,8 +96,11 @@ export default {
     onSubmit() {
       login(this.form).then(res => {
         if (res.code === 200) {
+          // var token = this.$route.query.token// 从URL地址上得到token
+          // 将数据放在当前组件的数据内
+          localStorage.setItem('token', 'tokencontent')// 保存token
           this.$message.success(res.msg)
-          sessionStorage.setItem('userName', this.form.UserName)
+          sessionStorage.setItem('userName', this.form.userName)
           this.$router.push('/index')
         } else {
           this.$message.error(res.msg)

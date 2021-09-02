@@ -116,6 +116,8 @@ export default {
         if (res.code === 200) {
           this.$message.success(res.msg)
           this.$router.push('/note')
+        } else {
+          this.$message.error(res.msg)
         }
       })
     },

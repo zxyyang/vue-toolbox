@@ -366,11 +366,11 @@ export default {
       }
       makeDir(param).then(res => {
         if (res.code === 200) {
-          this.$message.success('创建成功！')
+          this.$message.success(res.msg)
           this.dirName = ''
           this.mkdirDialogVisible = false
         } else {
-          this.$message.error('创建失败！')
+          this.$message.error(res.msg)
         }
         this.getFileList(this.currentPath)
       })

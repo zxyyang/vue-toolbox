@@ -1,28 +1,22 @@
 <template>
   <div class="bg">
     <div class="one" style="background-color: #212121">
-      <div class="text_1">
-        <p style="text-align: center;font-size: 50px ; font-family: 'Noto Sans', sans-serif;color: white">如果我们有人忘记了约定,那就在月球相见!</p>
-        <p style="text-align: center;font-size: 20px;color: blue ">Let's meet on the moon</p>
-      </div>
+
+      <el-image size="20%" :src="require('../../image/moon.png')" />
+
     </div>
-    <div class="tow">
-      <div class="text_2">
-        <p style="text-align: center;font-size: 50px ; ">第二页展示页面!</p>
-        <p style="text-align: center;font-size: 20px;color: green ">The Second Page!</p>
-      </div>
+    <div class="tow" style="background-color: cornflowerblue">
+      <el-image size="20%" :src="require('../../image/women.png')" />
     </div>
-    <div class="three" style="background-color: #212121">
-      <div class="text_3">
-        <p style="text-align: center;font-size: 50px ;color: white ">第三页展示页面!</p>
-        <p style="text-align: center;font-size: 20px;color: blueviolet ">The Third Page!</p>
-      </div>
-    </div>
-    <div class="four" style="background-color: cornflowerblue">
-      <div class="text_3">
-        <p style="text-align: center;font-size: 50px ; ">这里要放动画!</p>
-      </div>
-    </div>
+    <!--    <div class="three" style="background-color: #212121">-->
+    <!--      <div class="text_3">-->
+    <!--        <p style="text-align: center;font-size: 50px ;color: white ">第三页展示页面!</p>-->
+    <!--        <p style="text-align: center;font-size: 20px;color: blueviolet ">The Third Page!</p>-->
+    <!--      </div>-->
+    <!--    </div>-->
+    <!--    <div class="four" style="background-color: cornflowerblue">-->
+    <!--      <el-image size="20%" :src="require('../../image/women.png')" />-->
+    <!--    </div>-->
 
     <beian />
   </div>

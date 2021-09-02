@@ -16,10 +16,16 @@
         <div style="flex: auto;text-align: center"> <el-button round>主要按钮</el-button></div>
 
       </div></el-col>
+
       <el-col :span="4"><div class="rightRow">
         <div class="logOut">
-          <el-link :underline="true" style="color: #FFFFFF ;font-size: small" @click="logout">Log Out</el-link>
+
+          <span style="margin-right: 10px ; color: #35ef00 ;font-weight: 500;font-size: 18px"> {{ userName }}</span>
+          <el-link v-if="showLogIn" :underline="true" style="color: #FFFFFF ;font-size: small" @click="logIn">Log In</el-link>
+          <el-link v-if="showLogOut" :underline="true" style="color: #FFFFFF ;font-size: small" @click="logOut">Log Out</el-link>
+
         </div>
+
         <div>
           <a-locale-provider :locale="zh_CN">
             <App />
@@ -36,10 +42,37 @@ export default {
   name: 'Header',
   data() {
     return {
+      userName: sessionStorage.getItem('userName'),
+      showLogIn: true,
+      showLogOut: false
 
     }
   },
+  created() {
+    if (localStorage.getItem('token')) {
+      this.showLogOut = true
+      this.showLogIn = false
+    } else {
+      this.showLogOut = false
+      this.showLogIn = true
+    }
+  },
+
   methods: {
+    logIn() {
+      this.showLogOut = true
+      this.showLogIn = false
+      this.$router.push('/login')
+    },
+    logOut() {
+      this.showLogIn = true
+      this.showLogOut = false
+      // 清理token
+      localStorage.clear()
+      window.sessionStorage.clear()
+      this.$router.push('/index')
+      this.userName = ''
+    },
     toIndex() {
       this.$router.push('/index')
     },
