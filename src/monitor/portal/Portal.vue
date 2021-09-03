@@ -5,18 +5,21 @@
       <el-image size="20%" :src="require('../../image/moon.png')" />
 
     </div>
-    <div class="tow" style="background-color: cornflowerblue">
+    <div class="tow" style="background-color: #ffffff">
+      <div class="text_3">
+        <p style="text-align: center;font-size: 50px ;color: #000000 ">第二页展示页面!</p>
+        <p style="text-align: center;font-size: 20px;color: #013ffc ">The second Page!</p>
+      </div>
+    </div>
+    <div class="three" style="background-color: #212121">
+      <div class="text_3">
+        <p style="text-align: center;font-size: 50px ;color: white ">第三页展示页面!</p>
+        <p style="text-align: center;font-size: 20px;color: blueviolet ">The Third Page!</p>
+      </div>
+    </div>
+    <div class="four" style="background-color: cornflowerblue">
       <el-image size="20%" :src="require('../../image/women.png')" />
     </div>
-    <!--    <div class="three" style="background-color: #212121">-->
-    <!--      <div class="text_3">-->
-    <!--        <p style="text-align: center;font-size: 50px ;color: white ">第三页展示页面!</p>-->
-    <!--        <p style="text-align: center;font-size: 20px;color: blueviolet ">The Third Page!</p>-->
-    <!--      </div>-->
-    <!--    </div>-->
-    <!--    <div class="four" style="background-color: cornflowerblue">-->
-    <!--      <el-image size="20%" :src="require('../../image/women.png')" />-->
-    <!--    </div>-->
 
     <beian />
   </div>

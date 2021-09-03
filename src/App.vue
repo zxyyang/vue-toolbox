@@ -16,6 +16,12 @@ export default {
       }
 
     }
+  },
+  // 关闭浏览器清理token
+  mounted() {
+    window.addEventListener('beforeunload', () => {
+      localStorage.removeItem('token')
+    })
   }
 
 }
