@@ -18,8 +18,6 @@ const whites = ['/login', '/index']
 
 router.beforeEach((to, from, next) => {
   const token = localStorage.getItem('token')// 取出token
-  console.log('token======' + token)
-  console.log('我是 router过滤器')
   // 用to的地址来匹配白名单
   for (let i = 0; i < whites.length; i++) {
     if (to.fullPath === whites[i]) {
