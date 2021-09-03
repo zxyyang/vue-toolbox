@@ -109,7 +109,7 @@ export default {
         noteName: this.noteName,
         noteRemark: this.noteRemark,
         noteType: this.noteType,
-        noteContent: this.noteContent
+        noteContent: this.value
       }
       console.log('变量数据：' + param)
       update(param).then(res => {
