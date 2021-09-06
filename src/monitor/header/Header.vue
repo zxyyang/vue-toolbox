@@ -3,11 +3,11 @@
     <el-row type="flex" class="row-bg" justify="space-between">
 
       <el-col :span="10"><div class="leftRow">
-        <el-image :src="require('@/image/tothemoon.png')" style="object-fit: scale-down; cursor: pointer;margin-top: 2%" @click="toIndex()" />
+        <el-image :src="require('@/image/moreOne.png')" style="object-fit: scale-down; cursor: pointer;margin-top: 2% ;filter: invert(100%);" @click="toIndex()" />
       </div></el-col>
 
       <el-col :span="10"><div class="centRow">
-        <div style="flex: auto;text-align: center;"><el-link :underline="true" style="color: #FFFFFF ;font-weight:500;font-size: medium; " @click="toNote">Note</el-link></div>
+        <div style="flex: auto;text-align: center; "><el-link :underline="true" style="color: #FFFFFF ;font-weight:500;font-size: medium; " @click="toNote">Note</el-link></div>
         <div style="flex: auto;text-align: center"><el-link :underline="true" style="color: #FFFFFF ;font-weight:500;font-size: medium ;" @click="toTask">Task</el-link></div>
         <div style="flex: auto;text-align: center"><el-link :underline="true" style="color: #FFFFFF ;font-weight:500;font-size: medium;" @click="toCloudDisk">CloudDisk</el-link></div>
         <div style="flex: auto;text-align: center"><el-link :underline="true" style="color: #FFFFFF ;font-weight:500;font-size: medium;" @click="toChart">Chart</el-link></div>
@@ -16,10 +16,16 @@
         <div style="flex: auto;text-align: center"> <el-button round>主要按钮</el-button></div>
 
       </div></el-col>
+
       <el-col :span="4"><div class="rightRow">
         <div class="logOut">
-          <el-link :underline="true" style="color: #FFFFFF ;font-size: small" @click="logout">Log Out</el-link>
+
+          <span style="margin-right: 10px ; color: #35ef00 ;font-weight: 500;font-size: 18px"> {{ userName }}</span>
+          <el-link v-if="showLogIn" :underline="true" style="color: #FFFFFF ;font-size: small" @click="logIn">Log In</el-link>
+          <el-link v-if="showLogOut" :underline="true" style="color: #FFFFFF ;font-size: small" @click="logOut">Log Out</el-link>
+
         </div>
+
         <div>
           <a-locale-provider :locale="zh_CN">
             <App />
@@ -36,10 +42,37 @@ export default {
   name: 'Header',
   data() {
     return {
+      userName: sessionStorage.getItem('userName'),
+      showLogIn: true,
+      showLogOut: false
 
     }
   },
+  created() {
+    if (localStorage.getItem('token')) {
+      this.showLogOut = true
+      this.showLogIn = false
+    } else {
+      this.showLogOut = false
+      this.showLogIn = true
+    }
+  },
+
   methods: {
+    logIn() {
+      this.showLogOut = true
+      this.showLogIn = false
+      this.$router.push('/login')
+    },
+    logOut() {
+      this.showLogIn = true
+      this.showLogOut = false
+      // 清理token
+      localStorage.clear()
+      window.sessionStorage.clear()
+      this.$router.push('/index')
+      this.userName = ''
+    },
     toIndex() {
       this.$router.push('/index')
     },

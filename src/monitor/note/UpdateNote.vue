@@ -109,13 +109,15 @@ export default {
         noteName: this.noteName,
         noteRemark: this.noteRemark,
         noteType: this.noteType,
-        noteContent: this.noteContent
+        noteContent: this.value
       }
       console.log('变量数据：' + param)
       update(param).then(res => {
         if (res.code === 200) {
           this.$message.success(res.msg)
           this.$router.push('/note')
+        } else {
+          this.$message.error(res.msg)
         }
       })
     },

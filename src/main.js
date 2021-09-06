@@ -13,6 +13,29 @@ Vue.config.productionTip = false
 Vue.use(mavonEditor)
 Vue.use(Antd)
 Vue.use(ElementUI)
+// 白名单，有些页需要拦截，有些页不需要拦截
+const whites = ['/login', '/index']
+
+router.beforeEach((to, from, next) => {
+  const token = localStorage.getItem('token')// 取出token
+  // 用to的地址来匹配白名单
+  for (let i = 0; i < whites.length; i++) {
+    if (to.fullPath === whites[i]) {
+      next()
+      return
+    }
+  }
+  // 判断当前的token是否存在
+  if (token) {
+    // 如果不在白名单里，但是token存在的话，证明已经登录，也可以进行页面跳转
+    next()
+  } else {
+    console.log('转跳')
+    // 否则，就直接跳回登陆页
+    next('/login')
+  }
+})
+
 new Vue({
   el: '#app',
   components: { App },
