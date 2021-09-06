@@ -3,11 +3,11 @@
     <el-row type="flex" class="row-bg" justify="space-between">
 
       <el-col :span="10"><div class="leftRow">
-        <el-image :src="require('@/image/tothemoon.png')" style="object-fit: scale-down; cursor: pointer;margin-top: 2%" @click="toIndex()" />
+        <el-image :src="require('@/image/moreOne.png')" style="object-fit: scale-down; cursor: pointer;margin-top: 2% ;filter: invert(100%);" @click="toIndex()" />
       </div></el-col>
 
       <el-col :span="10"><div class="centRow">
-        <div style="flex: auto;text-align: center;"><el-link :underline="true" style="color: #FFFFFF ;font-weight:500;font-size: medium; " @click="toNote">Note</el-link></div>
+        <div style="flex: auto;text-align: center; "><el-link :underline="true" style="color: #FFFFFF ;font-weight:500;font-size: medium; " @click="toNote">Note</el-link></div>
         <div style="flex: auto;text-align: center"><el-link :underline="true" style="color: #FFFFFF ;font-weight:500;font-size: medium ;" @click="toTask">Task</el-link></div>
         <div style="flex: auto;text-align: center"><el-link :underline="true" style="color: #FFFFFF ;font-weight:500;font-size: medium;" @click="toCloudDisk">CloudDisk</el-link></div>
         <div style="flex: auto;text-align: center"><el-link :underline="true" style="color: #FFFFFF ;font-weight:500;font-size: medium;" @click="toChart">Chart</el-link></div>

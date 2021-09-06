@@ -2,7 +2,7 @@
   <div class="bg">
     <div class="one" style="background-color: #212121">
 
-      <el-image size="20%" :src="require('../../image/moon.png')" />
+      <p style="text-align: center;font-size: 50px ;color: white ">Learn More; Love More; One More;</p>
 
     </div>
     <div class="tow" style="background-color: #ffffff">
@@ -57,7 +57,7 @@ export default {
 <style scoped>
 .one{
 
-  height:  1000px;
+  height:  900px;
   width: 100%;
   /*防止子组件margain-top影响父组件*/
   overflow: hidden;
@@ -69,7 +69,7 @@ export default {
 }
 .tow{
   background-color: #FFFFFF ;
-  height:  1000px;
+  height:  900px;
   /*防止子组件margain-top影响父组件*/
   overflow: hidden;
   /*居中对齐=放父组件中*/
@@ -80,7 +80,7 @@ export default {
 }
 .three{
 
-  height:  1000px;
+  height:  900px;
   /*防止子组件margain-top影响父组件*/
   overflow: hidden;
   /*居中对齐=放父组件中*/
@@ -91,7 +91,7 @@ export default {
 }
 .four{
   background-color: #FFFFFF;
-  height:  1000px;
+  height:  900px;
   /*防止子组件margain-top影响父组件*/
   overflow: hidden;
   /*居中对齐=放父组件中*/
