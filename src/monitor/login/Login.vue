@@ -6,8 +6,8 @@
         <el-col :span="6" />
         <el-col :span="6">
           <div class="head" style="margin-left: 110px">
-            <h1>
-              To The Moon
+            <h1 style="font-weight: 650;font-size: 35px">
+              More One
               <svg width="200" height="36" viewBox="0 0 200 41" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path id="tick" d="M6 35C58.3333 35.8333 145.5 35 203 6.5" stroke="#43E229" stroke-width="11" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
