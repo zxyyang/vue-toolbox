@@ -17,7 +17,7 @@ Vue.use(ElementUI)
 const whites = ['/login', '/index']
 
 router.beforeEach((to, from, next) => {
-  const token = localStorage.getItem('token')// 取出token
+  const token = window.sessionStorage.getItem('token')// 取出token
   // 用to的地址来匹配白名单
   for (let i = 0; i < whites.length; i++) {
     if (to.fullPath === whites[i]) {

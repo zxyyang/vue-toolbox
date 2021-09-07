@@ -52,6 +52,7 @@
 <script>
 
 import { login } from '@/api/login'
+import { getToken } from '@/utils/auth'
 
 export default {
   data() {
@@ -85,7 +86,7 @@ export default {
       login(param).then(res => {
         if (res.code === 200) {
           this.$message.success(res.msg)
-          localStorage.setItem('token', 'tokencontent')// 保存token
+          sessionStorage.setItem('token', 'tokenContent')
           sessionStorage.setItem('userName', '测试账号')
           this.$router.push('/index')
         } else {
