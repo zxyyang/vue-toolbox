@@ -18,18 +18,18 @@ export function getContent(id) {
     params: param
   })
 }
-export function add(params) {
+export function add(param) {
   return request({
     url: '/note/add',
     method: 'post',
-    params
+    data: param
   })
 }
 export function update(params) {
   return request({
     url: '/note/update',
     method: 'POST',
-    params
+    data: params
   })
 }
 export function selectByName(params) {
