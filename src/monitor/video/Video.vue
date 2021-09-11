@@ -6,11 +6,18 @@
         <div style="margin-top: 10px ;margin-bottom: 10px">
           <a-input v-model="name" placeholder="请输入影视名字或者地址" style="width: 320px" />
           <a-button type="primary" style="left: 20px" @click="setVideoSrc">
-            接口一
+            普通搜索
+          </a-button>
+          <a-button type="primary" style="left: 30px" @click="getBiURL">
+            URL解析专用（B站专用）
           </a-button>
           <a-button type="primary" style="left: 40px" @click="getURL">
-            接口二（B站视频）
+            三方资源（输入全名）
           </a-button>
+          <a-button type="primary" style="left: 50px" @click="getMyURL">
+            史莱姆
+          </a-button>
+
         </div>
         <iframe v-if="isReloadData" class="video" :src="videoSrc" width="100%" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen />
         <!--        <d-player ref="player" class="dplayer-root" :options="options" />-->
@@ -117,6 +124,16 @@ export default {
     },
     getURL() {
       this.videoSrc = 'https://vip.bljiex.com/so.php?wd=' + this.name
+      this.isReloadData = false
+      this.isReloadData = true
+    },
+    getBiURL() {
+      this.videoSrc = ' https://vip.bljiex.com/?v=' + this.name
+      this.isReloadData = false
+      this.isReloadData = true
+    },
+    getMyURL() {
+      this.videoSrc = 'https://vip.bljiex.com/?index14347-0-1.htm'
       this.isReloadData = false
       this.isReloadData = true
     }
