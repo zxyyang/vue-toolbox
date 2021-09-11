@@ -49,7 +49,7 @@ export default {
     }
   },
   created() {
-    if (localStorage.getItem('token')) {
+    if (window.sessionStorage.getItem('token')) {
       this.showLogOut = true
       this.showLogIn = false
     } else {
@@ -68,7 +68,6 @@ export default {
       this.showLogIn = true
       this.showLogOut = false
       // 清理token
-      localStorage.clear()
       window.sessionStorage.clear()
       this.$router.push('/index')
       this.userName = ''

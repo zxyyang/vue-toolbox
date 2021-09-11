@@ -6,8 +6,8 @@
         <el-col :span="6" />
         <el-col :span="6">
           <div class="head" style="margin-left: 110px">
-            <h1>
-              To The Moon
+            <h1 style="font-weight: 650;font-size: 35px">
+              More One
               <svg width="200" height="36" viewBox="0 0 200 41" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path id="tick" d="M6 35C58.3333 35.8333 145.5 35 203 6.5" stroke="#43E229" stroke-width="11" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
@@ -52,6 +52,7 @@
 <script>
 
 import { login } from '@/api/login'
+import { getToken } from '@/utils/auth'
 
 export default {
   data() {
@@ -85,7 +86,7 @@ export default {
       login(param).then(res => {
         if (res.code === 200) {
           this.$message.success(res.msg)
-          localStorage.setItem('token', 'tokencontent')// 保存token
+          sessionStorage.setItem('token', 'tokenContent')
           sessionStorage.setItem('userName', '测试账号')
           this.$router.push('/index')
         } else {
@@ -98,8 +99,8 @@ export default {
         if (res.code === 200) {
           // var token = this.$route.query.token// 从URL地址上得到token
           // 将数据放在当前组件的数据内
-          localStorage.setItem('token', 'tokencontent')// 保存token
           this.$message.success(res.msg)
+          sessionStorage.setItem('token', 'tokenContent')
           sessionStorage.setItem('userName', this.form.userName)
           this.$router.push('/index')
         } else {

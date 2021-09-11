@@ -1,6 +1,13 @@
 'use strict'
 module.exports = {
-
+  chainWebpack: config => {
+    config
+      .plugin('html')
+      .tap(args => {
+        args[0].title = 'More One'
+        return args
+      })
+  },
   devServer: {
     port: 8080,
     open: true,

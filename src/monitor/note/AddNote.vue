@@ -85,6 +85,7 @@ export default {
         noteType: this.noteType,
         noteContent: this.value
       }
+
       console.log(param)
       add(param).then(res => {
         if (res.code === 200) {
