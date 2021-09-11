@@ -1,7 +1,21 @@
 <template>
-  <div class="bg">
-    <div class="main">
-      <d-player ref="player" class="dplayer-root" :options="options" />
+  <div style="background-color: #212121 ;height: 950px">
+    <div class="bg">
+
+      <div class="main">
+        <div style="margin-top: 10px ;margin-bottom: 10px">
+          <a-input v-model="name" placeholder="请输入影视名字或者地址" style="width: 320px" />
+          <a-button type="primary" style="left: 20px" @click="setVideoSrc">
+            接口一
+          </a-button>
+          <a-button type="primary" style="left: 40px" @click="getURL">
+            接口二（B站视频）
+          </a-button>
+        </div>
+        <iframe v-if="isReloadData" class="video" :src="videoSrc" width="100%" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen />
+        <!--        <d-player ref="player" class="dplayer-root" :options="options" />-->
+
+      </div>
     </div>
   </div>
 </template>
@@ -11,7 +25,11 @@
 export default {
   data() {
     return {
+      videoSrc: 'https://dp.8b5q.cn/dplayer/?url=FQ:00924f01f35f3e7eaa705f0c5b7a113d12c0e82dcdc2e0470f5f024d8d9fdef0a2',
+      name: '',
+      isReloadData: true,
       options: {
+
         autoplay: true, // 自动播放
         container: document.getElementById('dplayer'), // 播放器容器
         mutex: false, //  防止同时播放多个用户，在该用户开始播放时暂停其他用户
@@ -25,21 +43,21 @@ export default {
         playbackSpeed: [0.5, 0.75, 1, 1.25, 1.5, 2, 3], // 可选的播放速度，可自定义
         logo: 'http://qz9c5m60o.hn-bkt.clouddn.com/videoLogo1.png', // 在视频左角上打一个logo
         video: {
-          url: 'https://fqzy.cc/test13.mp4', // 播放视频的路径
-          // quality: [
-          //   // 设置多个质量的视频
-          //   {
-          //     name: '高清',
-          //     url: 'https://media.w3.org/2010/05/sintel/trailer.mp4',
-          //     type: 'auto' // 'auto', 'hls', 'flv', 'dash', 'webtorrent', 'normal' 或 其他自定义类型
-          //   },
-          //   {
-          //     name: '标清',
-          //     url:
-          //         'https://api.dogecloud.com/player/get.mp4?vcode=5ac682e6f8231991&userId=17&ext=.mp4',
-          //     type: 'auto'
-          //   }
-          // ],
+          url: 'https://z1.m1907.cn/?jx=https://www.bilibili.com/bangumi/play/ep391743', // 播放视频的路径
+          quality: [
+            // 设置多个质量的视频
+            {
+              name: '高清',
+              url: 'https://media.w3.org/2010/05/sintel/trailer.mp4',
+              type: 'auto' // 'auto', 'hls', 'flv', 'dash', 'webtorrent', 'normal' 或 其他自定义类型
+            }
+            // {
+            //   name: '标清',
+            //   url:
+            //       'https://api.dogecloud.com/player/get.mp4?vcode=5ac682e6f8231991&userId=17&ext=.mp4',
+            //   type: 'auto'
+            // }
+          ],
           defaultQuality: 0, // 默认是高清
           pic: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1606462956126&di=2d87964d4faf656af55d09d938640d97&imgtype=0&src=http%3A%2F%2Fattachments.gfan.com%2Fforum%2Fattachments2%2F201310%2F10%2F150326y7dzdd8d4kpjjdsd.jpg', // 视频封面图片
           thumbnails: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1606462956126&di=2d87964d4faf656af55d09d938640d97&imgtype=0&src=http%3A%2F%2Fattachments.gfan.com%2Fforum%2Fattachments2%2F201310%2F10%2F150326y7dzdd8d4kpjjdsd.jpg' // 进度条上的缩略图,需要通过dplayer-thumbnails来生成
@@ -88,12 +106,26 @@ export default {
           }
         ]
       }
+
+    }
+  },
+  methods: {
+    setVideoSrc() {
+      this.videoSrc = 'https://z1.m1907.cn/?jx=' + this.name
+      this.isReloadData = false
+      this.isReloadData = true
+    },
+    getURL() {
+      this.videoSrc = 'https://vip.bljiex.com/so.php?wd=' + this.name
+      this.isReloadData = false
+      this.isReloadData = true
     }
   }
 }
 </script>
 <style scoped>
 .bg{
+
   -webkit-align-items: center;
   display: flex;
   align-items: center;
@@ -134,10 +166,12 @@ export default {
 }
 
 .main {
-  width: 1490px;
-
+  width: 1442px;
+    height: 809px;
   margin: 0 auto;
   text-align: center;
 }
-
+.video{
+  height: 100%;
+}
 </style>

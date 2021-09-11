@@ -18,7 +18,7 @@ Vue.use(Antd)
 Vue.use(ElementUI)
 Vue.use(VueDPlayer)
 // 白名单，有些页需要拦截，有些页不需要拦截
-const whites = ['/login', '/index']
+const whites = ['/login', '/index', '/video']
 
 router.beforeEach((to, from, next) => {
   const token = window.sessionStorage.getItem('token')// 取出token

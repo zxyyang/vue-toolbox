@@ -171,13 +171,17 @@
       :close-on-click-modal="false"
     >
       <a-textarea
-        v-if="preViewType == 'txt'"
+        v-if="preViewType === 'txt'"
         v-model="preViewText"
         :disabled="true"
         :auto-size="{ minRows: 18 }"
         style="color: #000;background-color: #fff;height: 60vh;"
       />
-      <img v-if="preViewType == 'img'" :src="previewSrc">
+      <img v-if="preViewType === 'img'" :src="previewSrc">
+
+      <iframe v-if="preViewType === 'video'" :src="previewSrc" style="height: 500px; " width="100%" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen />
+      <!--      <d-player ref="player" class="dplayer-root" :options="options" />-->
+
     </el-dialog>
     <a-modal
       v-model="mkdirDialogVisible"
@@ -294,6 +298,7 @@ export default {
       filesList: [],
       skeleton_loading: false,
       selectedRowKeys: []
+
     }
   },
   watch: {
@@ -651,6 +656,17 @@ export default {
         this.preViewType = 'img'
       } else if (type === 'txt') {
         this.preViewType = 'txt'
+      } else if (type === 'mp4' ||
+          type === 'avi' ||
+          type === 'mp3' ||
+          type === 'WMV' ||
+          type === 'mov' ||
+          type === 'MP4' ||
+          type === 'AVI' ||
+          type === 'MP3' ||
+          type === 'wmv' ||
+          type === 'MOV') {
+        this.preViewType = 'video'
       } else {
         // 如果不是上述格式，则不允许预览
         return
@@ -660,6 +676,8 @@ export default {
         console.log(data)
         const url = res.data.fileUrl
         if (this.preViewType === 'img') {
+          this.previewSrc = url
+        } else if (this.preViewType === 'video') {
           this.previewSrc = url
         } else {
           // eslint-disable-next-line no-const-assign
@@ -735,14 +753,16 @@ export default {
         max-height: 70vh;
         overflow: auto;
     }
+    .preView_diaglog{
+      -webkit-align-items: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
     .preView_diaglog .el-dialog__body {
         padding: 0px;
-    }
 
-    .preView_diaglog .el-dialog__body iframe {
-        box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-        border: 1px solid #606266;
     }
 
     .preView_diaglog .el-dialog__body img {
@@ -757,4 +777,5 @@ export default {
         bottom: 0;
         background: rgba(0, 0, 0, 0.3);
     }
+
 </style>
