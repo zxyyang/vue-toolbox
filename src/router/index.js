@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import Portal from '../monitor/portal/Portal'
 import Main from '../monitor/main'
 import Note from '../monitor/note/Note'
-import Task from '../monitor/task/Task'
+import Task from '../monitor/video/Video'
 import Login from '@/monitor/login/Login'
 import CloudDisk from '@/monitor/cloudDisk/CloudDisk'
 import AddNote from '@/monitor/note/AddNote'
@@ -44,7 +44,7 @@ const router = new Router({
           component: Note
         },
         {
-          path: '/task',
+          path: '/video',
           component: Task
         },
         {

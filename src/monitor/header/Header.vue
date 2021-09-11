@@ -8,7 +8,7 @@
 
       <el-col :span="10"><div class="centRow">
         <div style="flex: auto;text-align: center; "><el-link :underline="true" style="color: #FFFFFF ;font-weight:500;font-size: medium; " @click="toNote">Note</el-link></div>
-        <div style="flex: auto;text-align: center"><el-link :underline="true" style="color: #FFFFFF ;font-weight:500;font-size: medium ;" @click="toTask">Task</el-link></div>
+        <div style="flex: auto;text-align: center"><el-link :underline="true" style="color: #FFFFFF ;font-weight:500;font-size: medium ;" @click="toVideo">Video</el-link></div>
         <div style="flex: auto;text-align: center"><el-link :underline="true" style="color: #FFFFFF ;font-weight:500;font-size: medium;" @click="toCloudDisk">CloudDisk</el-link></div>
         <div style="flex: auto;text-align: center"><el-link :underline="true" style="color: #FFFFFF ;font-weight:500;font-size: medium;" @click="toChart">Chart</el-link></div>
         <div style="flex: auto;text-align: center"><el-link :underline="true" style="color: #FFFFFF ;font-weight:500;font-size: medium;" @click="toResource">Resource</el-link></div>
@@ -78,8 +78,8 @@ export default {
     toNote() {
       this.$router.push('/note')
     },
-    toTask() {
-      this.$router.push('/task')
+    toVideo() {
+      this.$router.push('/video')
     },
     toCloudDisk() {
       this.$router.push('/cloudDisk')

@@ -85,7 +85,6 @@ export default {
       }
       login(param).then(res => {
         if (res.code === 200) {
-          this.$message.success(res.msg)
           sessionStorage.setItem('token', 'tokenContent')
           sessionStorage.setItem('userName', '测试账号')
           this.$router.push('/index')
@@ -99,7 +98,6 @@ export default {
         if (res.code === 200) {
           // var token = this.$route.query.token// 从URL地址上得到token
           // 将数据放在当前组件的数据内
-          this.$message.success(res.msg)
           sessionStorage.setItem('token', 'tokenContent')
           sessionStorage.setItem('userName', this.form.userName)
           this.$router.push('/index')

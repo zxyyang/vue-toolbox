@@ -9,10 +9,14 @@ import 'element-ui/lib/theme-chalk/index.css'
 import Antd from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.css'
 
+import VueDPlayer from 'vue-dplayer'
+import 'vue-dplayer/dist/vue-dplayer.css'
+
 Vue.config.productionTip = false
 Vue.use(mavonEditor)
 Vue.use(Antd)
 Vue.use(ElementUI)
+Vue.use(VueDPlayer)
 // 白名单，有些页需要拦截，有些页不需要拦截
 const whites = ['/login', '/index']
 
