@@ -92,7 +92,7 @@
           :scroll-style="true"
           :ishljs="true"
           :toolbars="toolbars"
-          style="height: 96% ;width: 98%;justify-content: center ; "
+          style="height: 96% ;width: 98%;  "
         >
           <template #right-toolbar-after>
             <button

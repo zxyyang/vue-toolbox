@@ -18,6 +18,7 @@
 import Header from '@/monitor/header/Header'
 
 export default {
+  name: 'Index',
   components: {
 
     Header

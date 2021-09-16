@@ -27,7 +27,7 @@
         </div>
 
         <div>
-          <a-locale-provider :locale="zh_CN">
+          <a-locale-provider>
             <App />
           </a-locale-provider>
         </div>

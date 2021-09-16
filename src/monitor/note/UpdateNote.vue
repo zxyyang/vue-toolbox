@@ -100,7 +100,6 @@ export default {
     })
   },
   mounted() {
-
   },
   methods: {
     // 修改
@@ -125,8 +124,6 @@ export default {
     // 监听markdown变化
     change(value, render) {
       this.html = render
-      this.blogInfo.blogMdContent = value
-      this.blogInfo.blogContent = render
     },
     // 上传图片接口pos 表示第几个图片
     async  handleEditorImgAdd(pos, $file) {
