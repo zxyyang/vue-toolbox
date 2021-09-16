@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { add } from '@/api/note'
+import { add, uploadFiles, deleteFiles } from '@/api/note'
 
 export default {
   name: 'AddNote',
@@ -53,7 +53,7 @@ export default {
         ul: true, // 无序列表
         link: true, // 链接
         imagelink: true, // 图片链接
-        code: false, // code
+        code: true, // code
         table: true, // 表格
         fullscreen: true, // 全屏编辑
         readmodel: true, // 沉浸式阅读
@@ -63,7 +63,7 @@ export default {
         undo: true, // 上一步
         redo: true, // 下一步
         trash: true, // 清空
-        save: true, // 保存（触发events中的save事件）
+        save: false, // 保存（触发events中的save事件）
         /* 1.4.2 */
         navigation: true, // 导航目录
         /* 2.1.8 */
@@ -103,18 +103,26 @@ export default {
       this.blogInfo.blogContent = render
     },
     // 上传图片接口pos 表示第几个图片
-    handleEditorImgAdd(pos, $file) {
+    async  handleEditorImgAdd(pos, $file) {
       var formdata = new FormData()
       formdata.append('file', $file)
-      this.$axios
-        .post('http://localhost:8000/blogs/image/upload/', formdata)
-        .then(res => {
-          var url = res.data.data
-          this.$refs.md.$img2Url(pos, url) // 这里就是引用ref = md 然后调用$img2Url方法即可替换地址
-        })
+      uploadFiles(formdata).then(res => {
+        var url = res.data
+        this.$refs.md.$imglst2Url([[pos, url]])
+      })
     },
-    handleEditorImgDel() {
-      console.log('handleEditorImgDel') // 我这里没做什么操作，后续我要写上接口，从七牛云CDN删除相应的图片
+    async  handleEditorImgDel(pos) {
+      const param = {
+        // 取得URL地址
+        url: pos[0]
+      }
+      deleteFiles(param).then(res => {
+        if (res.code === 200) {
+          this.$message.success(res.msg)
+        } else {
+          this.$message.error(res.msg)
+        }
+      })
     }
   }
 }
