@@ -11,7 +11,7 @@ export function uploadFiles(params) {
   return request({
     url: '/cloudFile/upload',
     method: 'post',
-    params
+    data: params
   })
 }
 

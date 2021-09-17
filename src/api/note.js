@@ -46,3 +46,22 @@ export function deleteNote(params) {
     params
   })
 }
+
+export function uploadFiles(params) {
+  return request({
+    url: '/cloudFile/noteAddImage',
+    method: 'post',
+    data: params,
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  })
+}
+export function deleteFiles(params) {
+  return request({
+    url: '/cloudFile/noteDeleteImage',
+    method: 'post',
+    params
+
+  })
+}
