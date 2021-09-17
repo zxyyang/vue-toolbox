@@ -12,6 +12,9 @@ import 'ant-design-vue/dist/antd.css'
 import VueDPlayer from 'vue-dplayer'
 import 'vue-dplayer/dist/vue-dplayer.css'
 
+import uploader from 'vue-simple-uploader'
+Vue.use(uploader)
+
 Vue.config.productionTip = false
 Vue.use(mavonEditor)
 Vue.use(Antd)
