@@ -22,7 +22,15 @@ Vue.use(ElementUI)
 Vue.use(VueDPlayer)
 // 白名单，有些页需要拦截，有些页不需要拦截
 const whites = ['/login', '/index', '/video']
+const errorHandler = (error, vm)=>{
+  this.$message.error("发生异常:"+error)
+  console.error('抛出全局异常');
+  console.error(vm);
+  console.error(error);
 
+}
+Vue.config.errorHandler = errorHandler;
+Vue.prototype.$throw = (error)=> errorHandler(error,this);
 router.beforeEach((to, from, next) => {
   const token = window.sessionStorage.getItem('token')// 取出token
   // 用to的地址来匹配白名单
@@ -50,4 +58,5 @@ new Vue({
   router,
   render: h => h(App)
 }).$mount('#app')
+
 

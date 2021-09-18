@@ -15,7 +15,9 @@
           <p>大文件秒传测试</p>
           <uploader-btn>选择文件</uploader-btn>
         </uploader-drop>
+        <div v-if="showList">
         <uploader-list />
+        </div>
       </uploader>
     </div>
   </div>
@@ -27,6 +29,7 @@ export default {
 
   data() {
     return {
+      showList: false,
       recording: {},
       options: {
         // https://github.com/simple-uploader/Uploader/tree/develop/samples/Node.js
@@ -47,6 +50,7 @@ export default {
     // 获取uploader对象
     this.$nextTick(() => {
       window.uploader = this.$refs.uploader.uploader
+      this.showList =true
     })
   },
   methods: {
@@ -59,27 +63,6 @@ export default {
       var invCode = split[1]
       this.recording.invCode = invCode
       this.recording.recordingUrl = message
-      // this.$ajax
-      //   .post(
-      //     "http://localhost:8080/interview/recording/saveFileData",
-      //     JSON.stringify(this.recording),
-      //     {
-      //       headers: {
-      //         "Content-Type": "application/json;charset=UTF-8"
-      //       }
-      //     }
-      //   )
-      //   .then(response => {
-      //     if ("ok" == response.data) {
-      //       console.log("上传成功");
-      //     } else {
-      //       alert("上传失败");
-      //     }
-      //   })
-      //   .catch(function(error) {
-      //     alert("上传失败");
-      //     console.log(error);
-      //   });
     }
   }
 }
