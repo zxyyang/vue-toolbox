@@ -22,15 +22,14 @@ Vue.use(ElementUI)
 Vue.use(VueDPlayer)
 // 白名单，有些页需要拦截，有些页不需要拦截
 const whites = ['/login', '/index', '/video']
-const errorHandler = (error, vm)=>{
-  this.$message.error("发生异常:"+error)
-  console.error('抛出全局异常');
-  console.error(vm);
-  console.error(error);
-
+const errorHandler = (error, vm) => {
+  this.$message.error('发生异常:' + error)
+  console.error('抛出全局异常')
+  console.error(vm)
+  console.error(error)
 }
-Vue.config.errorHandler = errorHandler;
-Vue.prototype.$throw = (error)=> errorHandler(error,this);
+Vue.config.errorHandler = errorHandler
+Vue.prototype.$throw = (error) => errorHandler(error, this)
 router.beforeEach((to, from, next) => {
   const token = window.sessionStorage.getItem('token')// 取出token
   // 用to的地址来匹配白名单
@@ -45,7 +44,7 @@ router.beforeEach((to, from, next) => {
     // 如果不在白名单里，但是token存在的话，证明已经登录，也可以进行页面跳转
     next()
   } else {
-    console.log('转跳')
+    // console.log('转跳')
     // 否则，就直接跳回登陆页
     next('/login')
   }
@@ -58,5 +57,4 @@ new Vue({
   router,
   render: h => h(App)
 }).$mount('#app')
-
 

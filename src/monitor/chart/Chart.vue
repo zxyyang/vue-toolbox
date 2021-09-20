@@ -14,9 +14,10 @@
         <uploader-drop>
           <p>大文件秒传测试</p>
           <uploader-btn>选择文件</uploader-btn>
+
         </uploader-drop>
         <div v-if="showList">
-        <uploader-list />
+          <uploader-list />
         </div>
       </uploader>
     </div>
@@ -24,6 +25,8 @@
 </template>
 
 <script>
+
+// import { saveUploadFiles } from '@/api/upload'
 
 export default {
 
@@ -35,7 +38,7 @@ export default {
         // https://github.com/simple-uploader/Uploader/tree/develop/samples/Node.js
         target: 'http://localhost:8888/api/upload/upload',
         testChunks: false, // 不校验
-        chunkSize: '10240000'
+        chunkSize: '102400000'
       },
       statusText: {
         success: '上传成功',
@@ -50,19 +53,30 @@ export default {
     // 获取uploader对象
     this.$nextTick(() => {
       window.uploader = this.$refs.uploader.uploader
-      this.showList =true
+      this.showList = true
     })
   },
   methods: {
+
     // 上传成功的事件
     fileSuccess(rootFile, file, message, chunk) {
-      console.log(message)
       // 将面试邀请code和文件路径去保存到数据库中
-      var href = location.href
-      var split = href.split('?')
-      var invCode = split[1]
-      this.recording.invCode = invCode
-      this.recording.recordingUrl = message
+      // var fileName = rootFile.file.name
+      // const param = {
+      //   fileName: fileName,
+      //   path: 'Ceshimul'
+      // }
+      // saveUploadFiles(param).then(res => {
+      //   if (res.code === 200) {
+      //     this.$message.success(res.msg)
+      //   } else {
+      //     alert(res.msg)
+      //     this.$message.error(res.msg)
+      //   }
+      // }).catch(function(error) {
+      //   alert('上传失败')
+      //   this.$message.success(error)
+      // })
     }
   }
 }
