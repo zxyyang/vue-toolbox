@@ -11,7 +11,11 @@ export function uploadFiles(params) {
   return request({
     url: '/cloudFile/upload',
     method: 'post',
-    data: params
+    data: params,
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+
   })
 }
 

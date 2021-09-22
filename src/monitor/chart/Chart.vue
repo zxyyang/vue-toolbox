@@ -38,7 +38,18 @@ export default {
         // https://github.com/simple-uploader/Uploader/tree/develop/samples/Node.js
         target: 'http://localhost:8888/api/upload/upload',
         testChunks: false, // 不校验
-        chunkSize: '102400000'
+        chunkSize: '102400000',
+        maxChunkRetries: 5, // 最大自动失败重试上传次数
+        singleFile: true, // 单文件上传,
+        simultaneousUploads: 1
+        // processParams(params) { // 每一次分片传给后台的参数，params是该方法返回的形参，包含分片信息
+        //   return { // 返回一个对象，会添加到每一个分片的请求参数里面
+        //     name: params.filename,
+        //     code: params.identifier,
+        //     total: params.totalChunks,
+        //     index: params.chunkNumber,
+        //   }
+        // }
       },
       statusText: {
         success: '上传成功',
