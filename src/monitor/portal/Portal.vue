@@ -7,7 +7,7 @@
     </div>
     <div class="tow" style="background-color: #ffffff">
       <div class="text_3">
-        <p style="text-align: center;font-size: 50px ;color: #000000 ">刘琴是猪 🐖</p>
+        <p style="text-align: center;font-size: 50px ;color: #000000 ">HHHHHH</p>
         <p style="text-align: center;font-size: 20px;color: #013ffc ">The second Page!</p>
       </div>
       <div>
