@@ -82,21 +82,12 @@
           onChange: onSelectChange
         }"
       >
-
         <a-table-column key="name" title="文件名称" data-index="name">
           <template slot-scope="name">
             <span>
               <a-icon class="file_ico" :type="checkType(name)" />
-              <a-button
-                type="link"
-                @click="
-                  if (name.substr(name.length - 1) === '/') {
-                    clickDir(name)
-                  } else {
-                    clickFile(name)
-                  }
-                "
-              >{{ name.replace(/\/$/, '') }}</a-button>
+              // eslint-disable-next-line
+              <a-button type="link" @click="if (name.substr(name.length - 1) === '/') {clickDir(name)} else {clickFile(name)}">{{ name.replace(/\/$/, '') }}</a-button>
               <!--              name.charAt(name.length-1)=== '/' ? name.replace('/',''): name-->
             </span>
           </template>
@@ -276,6 +267,7 @@ import ATableColumn from 'ant-design-vue/es/table/Column'
 export default {
   name: 'Files',
   components: { ATableColumn },
+  // eslint-disable-next-line vue/require-prop-types
   props: ['mess'],
   data() {
     return {
@@ -528,74 +520,51 @@ export default {
       switch (name.substr(name.indexOf('.') + 1)) {
         case 'txt':
           return 'file-text'
-          break
         case 'pdf':
           return 'file-pdf'
-          break
         case 'png':
           return 'file-image'
-          break
         case 'jpg':
           return 'file-jpg'
-          break
         case 'jpeg':
           return 'file-image'
-          break
         case 'gif':
           return 'file-image'
-          break
         case 'zip':
           return 'file-zip'
-          break
         case 'doc':
           return 'file-word'
-          break
         case 'docx':
           return 'file-word'
-          break
         case 'rtf':
           return 'file-word'
-          break
         case 'xlsx':
           return 'file-excel'
-          break
         case 'ppt':
           return 'file-ppt'
-          break
         case 'pptx':
           return 'file-ppt'
-          break
         case 'md':
           return 'file-markdown'
-          break
         case 'java':
           return 'code'
-          break
         case 'class':
           return 'file-project'
-          break
         case 'sql':
           return 'code'
-          break
         case 'vue':
           return 'layout'
-          break
         case 'html':
           return 'layout'
-          break
         case 'py':
           return 'code'
-          break
         case 'cpp':
           return 'code'
-          break
         case 'c':
           return 'code'
-          break
 
         default:
           return 'file'
-          break
       }
     },
     // 判断文件上传是否成功
@@ -674,7 +643,7 @@ export default {
       download(name).then(res => {
         const data = res.data
         console.log(data)
-        const url = res.data.fileUrl
+        let url = res.data.fileUrl
         if (this.preViewType === 'img') {
           this.previewSrc = url
         } else if (this.preViewType === 'video') {

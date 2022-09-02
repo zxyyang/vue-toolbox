@@ -52,7 +52,7 @@
 <script>
 
 import { login } from '@/api/login'
-import { getToken } from '@/utils/auth'
+// import { getToken } from '@/utils/auth'
 
 export default {
   data() {

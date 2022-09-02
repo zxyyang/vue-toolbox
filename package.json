@@ -29,7 +29,8 @@
     "vue-router": "^3.3.4",
     "vue-s-markdown": "^2.3.3",
     "vue-simple-uploader": "^0.7.6",
-    "vue-video-player": "^5.0.2"
+    "vue-video-player": "^5.0.2",
+    "yarn": "^1.22.19"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.29.3",

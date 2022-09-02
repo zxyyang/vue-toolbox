@@ -4,7 +4,7 @@
     <div style="margin-top: 10px;margin-bottom: 10px">
       <a-space style="margin-left: 20px">
         <a-input-search
-          v-model:value="searchValue"
+          v-model="searchValue"
           placeholder="input search note name"
           style="width: 200px"
           @search="onSearch"
