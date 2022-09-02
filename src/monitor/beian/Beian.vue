@@ -4,12 +4,12 @@
 
       <a
         class="banquan"
-        style="color: #FFFFFF;text-decoration:none;z-index: 1"
-        href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=备案编号"
+        style="color: #002fa7;text-decoration:none;z-index: 1;"
+        href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=陕ICP备20006982号"
         target="_blank"
-      >京ICP备12345678900号</a>
+      >陕ICP备20006982号</a>
       <a>   ©2021ZXYANG</a>
-      <a> ☺E-amil：artist.yang@foxmail.com</a></p>
+      <a> ☺E-amil：740444603@qq.com</a></p>
   </div>
 </template>
 

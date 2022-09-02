@@ -79,14 +79,13 @@
         :loading="skeleton_loading"
         :row-selection="{
           selectedRowKeys: selectedRowKeys,
-          onChange: onSelectChange
+          onChange: onSelectChan
         }"
       >
         <a-table-column key="name" title="文件名称" data-index="name">
           <template slot-scope="name">
             <span>
               <a-icon class="file_ico" :type="checkType(name)" />
-              // eslint-disable-next-line
               <a-button type="link" @click="if (name.substr(name.length - 1) === '/') {clickDir(name)} else {clickFile(name)}">{{ name.replace(/\/$/, '') }}</a-button>
               <!--              name.charAt(name.length-1)=== '/' ? name.replace('/',''): name-->
             </span>

@@ -1,4 +1,5 @@
 # vue-toolbox
  工具库前端
->图标
- npm i makeit-admin-pro
+>图标   
+> npm i makeit-admin-pro  
+> yarn add makeit-admin-pro
