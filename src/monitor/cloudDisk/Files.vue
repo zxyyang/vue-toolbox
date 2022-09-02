@@ -16,7 +16,7 @@
           :multiple="true"
           action="/api/cloudFile/upload"
           :data="{path: currentPath}"
-          :beforeupload="uploadBeforeUpload"
+          :before-upload="uploadBeforeUpload"
           :show-upload-list="true"
           @change="uploadFileHandle"
         >
@@ -79,7 +79,7 @@
         :loading="skeleton_loading"
         :row-selection="{
           selectedRowKeys: selectedRowKeys,
-          onChange: onSelectChan
+          onChange: onSelectChange
         }"
       >
         <a-table-column key="name" title="文件名称" data-index="name">
@@ -116,18 +116,18 @@
         </a-table-column>
       </a-table>
     </div>
-    <el-dialog
+<!--    <el-dialog
       title="选择目标文件夹"
       :visible.sync="moveFileDialogVisible"
       width="40%"
     >
-      <a-page-header
-        style="border: 1px solid rgb(235, 237, 240)"
-        :bordered="true"
-        sub-title="返回上一层"
-        @back="moveClickUp"
-      />
-    </el-dialog>
+&lt;!&ndash;      <a-page-header&ndash;&gt;
+&lt;!&ndash;        style="border: 1px solid rgb(235, 237, 240)"&ndash;&gt;
+&lt;!&ndash;        :bordered="true"&ndash;&gt;
+&lt;!&ndash;        sub-title="返回上一层"&ndash;&gt;
+&lt;!&ndash;        @back="moveClickUp"&ndash;&gt;
+&lt;!&ndash;      />&ndash;&gt;
+    </el-dialog>-->
     <!--    打开上传文件窗口-->
     <a-modal
       v-model="uploadFileVisible"
@@ -140,7 +140,7 @@
         :multiple="true"
         action="/api/cloudFile/upload"
         :data="uploadData"
-        :beforeupload="uploadBeforeUpload"
+        :before-upload="uploadBeforeUpload"
         :show-upload-list="true"
         @change="uploadFileHandle"
       >
@@ -183,7 +183,6 @@
     >
       <p>文件夹会建立在当前目录下</p>
       <a-input
-        v-model="dirName"
         class="mkdir_input"
         placeholder="输入文件夹名称"
       />
@@ -208,7 +207,8 @@
         </a-table-column>
       </a-table>
     </a-modal>
-    <a-modal
+
+<!--    <a-modal
       v-model="shareFileDialogVisible"
       title="分享文件"
       ok-text="确定"
@@ -254,11 +254,12 @@
           </div>
         </div>
       </a-spin>
-    </a-modal>
+    </a-modal>-->
   </div>
 </template>
 
 <script>
+import Axios from 'axios'
 import utils from '../../js/utils'
 import { download, list, makeDir, uploadFiles, deleteFile, selectByName } from '../../api/cloudDisk'
 import ATableColumn from 'ant-design-vue/es/table/Column'
@@ -289,7 +290,6 @@ export default {
       filesList: [],
       skeleton_loading: false,
       selectedRowKeys: []
-
     }
   },
   watch: {
