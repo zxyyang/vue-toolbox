@@ -43,7 +43,6 @@
             </el-form>
           </div>
         </el-col>
-        <el-col :span="6"><div /></el-col>
       </el-row>
     </div>
   </div>
