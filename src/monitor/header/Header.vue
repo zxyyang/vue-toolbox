@@ -10,7 +10,7 @@
         <div style="flex: auto;text-align: center; "><el-link :underline="true" style="color: #FFFFFF ;font-weight:500;font-size: medium; " @click="toNote">Note</el-link></div>
         <div style="flex: auto;text-align: center"><el-link :underline="true" style="color: #FFFFFF ;font-weight:500;font-size: medium ;" @click="toVideo">Video</el-link></div>
         <div style="flex: auto;text-align: center"><el-link :underline="true" style="color: #FFFFFF ;font-weight:500;font-size: medium;" @click="toCloudDisk">CloudDisk</el-link></div>
-        <div style="flex: auto;text-align: center"><el-link :underline="true" style="color: #FFFFFF ;font-weight:500;font-size: medium;" @click="toChart">Chart</el-link></div>
+        <div style="flex: auto;text-align: center"><el-link :underline="true" style="color: #FFFFFF ;font-weight:500;font-size: medium;" @click="toWx">Love</el-link></div>
         <div style="flex: auto;text-align: center"><el-link :underline="true" style="color: #FFFFFF ;font-weight:500;font-size: medium;" @click="toResource">Resource</el-link></div>
         <div style="flex: auto;text-align: center"><el-button round :underline="true" style="color: #000000 ;font-weight:500;font-size: medium;" @click="toAbout">About</el-button></div>
 <!--        <div style="flex: auto;text-align: center"> <el-button round>主要按钮</el-button></div>-->
@@ -84,8 +84,8 @@ export default {
     toCloudDisk() {
       this.$router.push('/cloudDisk')
     },
-    toChart() {
-      this.$router.push('/chart')
+    toWx() {
+      this.$router.push('/Wx')
     },
     toResource() {
       this.$router.push('/resource')
