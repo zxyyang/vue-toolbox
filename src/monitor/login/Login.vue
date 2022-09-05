@@ -3,7 +3,6 @@
 
     <div class="wrap">
       <el-row type="flex" justify="center">
-        <el-col :span="6" />
         <el-col :span="6">
           <div class="head" style="margin-left: 110px">
             <h1 style="font-weight: 650;font-size: 35px">
@@ -194,6 +193,10 @@ export default {
     }
     div{
         white-space:nowrap;
+    }
+    .all{
+      justify-content: center;
+      align-items: center;
     }
 
 </style>
