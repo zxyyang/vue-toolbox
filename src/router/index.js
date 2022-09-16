@@ -9,6 +9,7 @@ import CloudDisk from '@/monitor/cloudDisk/CloudDisk'
 import AddNote from '@/monitor/note/AddNote'
 import UpdateNote from '@/monitor/note/UpdateNote'
 import Wx from '@/monitor/Weixin/wx'
+import AddRemind from '@/monitor/Weixin/addRemind'
 Vue.use(Router)
 // 创建路由对象并配置路由
 const originalPush = Router.prototype.push
@@ -33,8 +34,14 @@ const router = new Router({
           component: AddNote
         },
         {
-          path: '/Wx',
-          component: Wx
+          path: '/wx',
+          component: Wx,
+          children: [
+            {
+              path: '/addRemind',
+              component: AddRemind
+            }
+          ]
         },
         {
           path: '/updateNote',
