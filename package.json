@@ -8,6 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "amfe-flexible": "^2.2.1",
     "ant-design-vue": "^1.7.8",
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
@@ -19,9 +20,12 @@
     "highlight.js": "^11.2.0",
     "jquery": "^3.6.0",
     "js-cookie": "^3.0.0",
+    "lib-flexible": "^0.3.2",
     "makeit-admin-pro": "^1.200.639",
     "marked": "^3.0.2",
     "mavon-editor": "^2.9.1",
+    "postcss-px2rem": "^0.3.0",
+    "postcss-pxtorem": "^6.0.0",
     "utils": "^0.2.2",
     "vue": "^2.6.11",
     "vue-dplayer": "^0.0.10",

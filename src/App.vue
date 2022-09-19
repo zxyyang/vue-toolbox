@@ -11,12 +11,14 @@
 export default {
   data() {
     return {
+      deviceType: '',
       App: {
 
       }
 
     }
   }
+
 }
 </script>
 
