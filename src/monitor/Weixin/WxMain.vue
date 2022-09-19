@@ -1,14 +1,14 @@
 <template>
-  <div>
 
+  <div>
     <div style="margin-top: 10px;margin-bottom: 10px">
-<!--      <a-space style="margin-left: 2%">-->
-<!--        <a-input-search-->
-<!--          v-model="searchValue"-->
-<!--          placeholder="input search remind name"-->
-<!--          @search="onSearch"-->
-<!--        />-->
-<!--      </a-space>-->
+      <!--      <a-space style="margin-left: 2%">-->
+      <!--        <a-input-search-->
+      <!--          v-model="searchValue"-->
+      <!--          placeholder="input search remind name"-->
+      <!--          @search="onSearch"-->
+      <!--        />-->
+      <!--      </a-space>-->
       <a-button type="primary" style="float: right; margin-right: 2%" @click="$router.push('/wx/addRemind')">新建备忘录</a-button>
     </div>
     <div class="tablediv">
@@ -16,6 +16,7 @@
       <el-table
         ref="multipleTable"
         tooltip-effect="dark"
+
         class="table"
         :data="pageInfo.list"
         style="width: 100%; "
@@ -30,6 +31,7 @@
         <el-table-column
           prop="id"
           label="任务编号"
+          align="center"
         />
         <el-table-column
           sortable
@@ -42,7 +44,11 @@
           label="提醒内容"
           align="center"
         />
-
+        <el-table-column
+          prop="type"
+          label="提醒人"
+          align="center"
+        />
         <el-table-column
           prop="status"
           label="状态"
@@ -153,8 +159,33 @@ export default {
         pageNumber: this.pageNumber,
         pageSize: this.pageSize
       }
+
       listRemind(param).then(res => {
         if (res.code === 200) {
+          const datas = res.data.list
+          for (let i = 0; i < datas.length; i++) {
+            var type
+            switch (datas[i].type) {
+              case 0 : {
+                type = '所有人'
+                break
+              }
+              case 1 : {
+                type = '杨梓轩'
+                break
+              }
+              case 2 : {
+                type = '周艺'
+                break
+              }
+              default: {
+                type = '所有人'
+                break
+              }
+            }
+            datas[i].type = type
+          }
+          res.data.list = datas
           this.pageInfo = res.data
           this.total = res.data.total
         } else {

@@ -15,6 +15,9 @@ export function deleteRemind(params) {
   })
 }
 export function addRemind(param) {
+  // const params = {
+  //   remindVo: param
+  // }
   return request({
     url: '/wx/addRemind',
     method: 'post',

@@ -21,7 +21,7 @@ Vue.use(Antd)
 Vue.use(ElementUI)
 Vue.use(VueDPlayer)
 // 白名单，有些页需要拦截，有些页不需要拦截
-const whites = ['/login', '/index', '/video']
+const whites = ['/login', '/index', '/video', '/wxRemind', '/wx/addRemind']
 const errorHandler = (error, vm) => {
   this.$message.error('发生异常:' + error)
   console.error('抛出全局异常')

@@ -8,8 +8,9 @@ import Login from '@/monitor/login/Login'
 import CloudDisk from '@/monitor/cloudDisk/CloudDisk'
 import AddNote from '@/monitor/note/AddNote'
 import UpdateNote from '@/monitor/note/UpdateNote'
-import Wx from '@/monitor/Weixin/wx'
-import AddRemind from '@/monitor/Weixin/addRemind'
+import WxMain from '@/monitor/Weixin/WxMain'
+import AddRemind from '@/monitor/Weixin/AddRemind'
+import WxRouter from '@/monitor/Weixin/WxRouter'
 Vue.use(Router)
 // 创建路由对象并配置路由
 const originalPush = Router.prototype.push
@@ -30,43 +31,46 @@ const router = new Router({
       component: Main,
       children: [ /* 配置子路由*/
         {
-          path: '/addNote',
+          path: 'addNote',
           component: AddNote
         },
         {
-          path: '/wx',
-          component: Wx,
+          path: 'updateNote',
+          component: UpdateNote
+        },
+        {
+          path: 'index',
+          component: Portal
+        },
+        {
+          path: 'note',
+          component: Note
+        },
+        {
+          path: 'video',
+          component: Task
+        },
+        {
+          path: 'cloudDisk',
+          component: CloudDisk
+        },
+        {
+          path: '/wx', redirect: 'wxRemind',
+          component: WxRouter,
           children: [
             {
-              path: '/addRemind',
+              path: 'addRemind',
               component: AddRemind
             }
           ]
         },
         {
-          path: '/updateNote',
-          component: UpdateNote
-        },
-        {
-          path: '/index',
-          component: Portal
-        },
-        {
-          path: '/note',
-          component: Note
-        },
-        {
-          path: '/video',
-          component: Task
-        },
-        {
-          path: '/cloudDisk',
-          component: CloudDisk
+          path: 'wxRemind',
+          component: WxMain
         }
 
       ]
     }
-
   ]
 })
 
