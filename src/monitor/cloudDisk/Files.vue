@@ -86,7 +86,7 @@
           <template slot-scope="name">
             <span>
               <div>
-                <div >  <a-icon class="file_ico" style="font-size:30px;justify-content: center;" :type="checkType(name)" /></div>
+                <div style=" margin-left: 10px">  <a-icon class="file_ico" style="font-size:30px;justify-content: center;" :type="checkType(name)" /></div>
                 <div><a-button type="link" @click="if (name.substr(name.length - 1) === '/') {clickDir(name)} else {clickFile(name)}">{{ name.replace(/\/$/, '') }}</a-button></div>
               </div>
               <!--              name.charAt(name.length-1)=== '/' ? name.replace('/',''): name-->
