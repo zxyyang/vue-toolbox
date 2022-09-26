@@ -11,6 +11,7 @@ import UpdateNote from '@/monitor/note/UpdateNote'
 import WxMain from '@/monitor/Weixin/WxMain'
 import AddRemind from '@/monitor/Weixin/AddRemind'
 import WxRouter from '@/monitor/Weixin/WxRouter'
+import Todo from '@/monitor/todoList/todo'
 Vue.use(Router)
 // 创建路由对象并配置路由
 const originalPush = Router.prototype.push
@@ -67,6 +68,10 @@ const router = new Router({
         {
           path: 'wxRemind',
           component: WxMain
+        },
+        {
+          path: 'todo',
+          component: Todo
         }
 
       ]

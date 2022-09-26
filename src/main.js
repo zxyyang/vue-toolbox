@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-import 'lib-flexible'
 import ElementUI from 'element-ui'
 // markdown
 import mavonEditor from 'mavon-editor'
@@ -52,7 +51,7 @@ router.beforeEach((to, from, next) => {
 })
 
 new Vue({
-  el: '#app',
+  // el: '#app',
   components: { App },
   template: '<App/>',
   router,

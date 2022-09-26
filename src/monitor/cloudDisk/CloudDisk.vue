@@ -1,7 +1,7 @@
 <template>
   <a-layout id="components-layout-demo-top-side-2" class="content">
     <a-layout>
-      <a-layout-sider width="200" style="background: #fff">
+<!--      <a-layout-sider width="200" style="background: #fff">
         <a-menu
           mode="inline"
           :default-selected-keys="navigationDef"
@@ -53,7 +53,7 @@
             </a-tooltip>
           </a-menu-item>
         </a-menu>
-      </a-layout-sider>
+      </a-layout-sider>-->
       <a-layout style="padding: 0 24px 24px">
         <a-layout-content
           :style="{
@@ -70,7 +70,7 @@
           <!--            @changeUploadList="changeUploadList"-->
           <!--          />-->
           <Files />
-          <div class="side_button_group">
+<!--          <div class="side_button_group">
             <a-button
               icon="plus-circle"
               class="side_button_item"
@@ -85,11 +85,11 @@
               </template>
               <a-button icon="info-circle" class="side_button_item" /><br>
             </a-popover>
-          </div>
+          </div>-->
         </a-layout-content>
       </a-layout>
     </a-layout>
-    <a-modal
+<!--    <a-modal
       v-model="downloadShareFileDialogVisible"
       title="获得别人分享的文件"
       ok-text="确定"
@@ -120,46 +120,46 @@
           </div>
         </div>
       </a-spin>
-    </a-modal>
-    <a-modal
-      v-model="verifyPwdDialogVisible"
-      title="验证密码"
-      ok-text="确定"
-      cancel-text="取消"
-      :mask-closable="false"
-      @ok="verifyPwd"
-    >
-      <a-spin tip="正在验证中..." :spinning="verifyPwd_loading">
-        <p>为了文件安全，隐私空间需要重新验证密码。</p>
-        <a-input-password
-          v-model="verifyPwd_input"
-          placeholder="输入你的密码"
-          style="margin-top: 10px;"
-        />
-      </a-spin>
-    </a-modal>
-    <a-modal
-      v-model="updatePwdDialogVisible"
-      title="修改密码"
-      ok-text="确定"
-      cancel-text="取消"
-      :mask-closable="false"
-      @ok="updatePwd"
-    >
-      <a-spin tip="正在验证中..." :spinning="update_Pwd_loading">
-        <p>请输入当前密码与新密码。</p>
-        <a-input-password
-          v-model="update_old_Pwd_input"
-          style="margin-bottom: 11px;"
-          placeholder="输入原密码"
-        />
-        <a-input-password
-          v-model="update_new_Pwd_input"
-          class="input"
-          placeholder="输入新密码"
-        />
-      </a-spin>
-    </a-modal>
+    </a-modal>-->
+<!--    <a-modal-->
+<!--      v-model="verifyPwdDialogVisible"-->
+<!--      title="验证密码"-->
+<!--      ok-text="确定"-->
+<!--      cancel-text="取消"-->
+<!--      :mask-closable="false"-->
+<!--      @ok="verifyPwd"-->
+<!--    >-->
+<!--      <a-spin tip="正在验证中..." :spinning="verifyPwd_loading">-->
+<!--        <p>为了文件安全，隐私空间需要重新验证密码。</p>-->
+<!--        <a-input-password-->
+<!--          v-model="verifyPwd_input"-->
+<!--          placeholder="输入你的密码"-->
+<!--          style="margin-top: 10px;"-->
+<!--        />-->
+<!--      </a-spin>-->
+<!--    </a-modal>-->
+<!--    <a-modal-->
+<!--      v-model="updatePwdDialogVisible"-->
+<!--      title="修改密码"-->
+<!--      ok-text="确定"-->
+<!--      cancel-text="取消"-->
+<!--      :mask-closable="false"-->
+<!--      @ok="updatePwd"-->
+<!--    >-->
+<!--      <a-spin tip="正在验证中..." :spinning="update_Pwd_loading">-->
+<!--        <p>请输入当前密码与新密码。</p>-->
+<!--        <a-input-password-->
+<!--          v-model="update_old_Pwd_input"-->
+<!--          style="margin-bottom: 11px;"-->
+<!--          placeholder="输入原密码"-->
+<!--        />-->
+<!--        <a-input-password-->
+<!--          v-model="update_new_Pwd_input"-->
+<!--          class="input"-->
+<!--          placeholder="输入新密码"-->
+<!--        />-->
+<!--      </a-spin>-->
+<!--    </a-modal>-->
   </a-layout>
 </template>
 <script>

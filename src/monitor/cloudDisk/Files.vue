@@ -85,8 +85,10 @@
         <a-table-column key="name" title="文件名称" data-index="name">
           <template slot-scope="name">
             <span>
-              <a-icon class="file_ico" :type="checkType(name)" />
-              <a-button type="link" @click="if (name.substr(name.length - 1) === '/') {clickDir(name)} else {clickFile(name)}">{{ name.replace(/\/$/, '') }}</a-button>
+              <div>
+                <div style=" margin-left: 20px">  <a-icon class="file_ico" style="font-size:30px;justify-content: center;" :type="checkType(name)" /></div>
+                <div><a-button type="link" @click="if (name.substr(name.length - 1) === '/') {clickDir(name)} else {clickFile(name)}">{{ name.replace(/\/$/, '') }}</a-button></div>
+              </div>
               <!--              name.charAt(name.length-1)=== '/' ? name.replace('/',''): name-->
             </span>
           </template>
@@ -116,7 +118,7 @@
         </a-table-column>
       </a-table>
     </div>
-<!--    <el-dialog
+    <!--    <el-dialog
       title="选择目标文件夹"
       :visible.sync="moveFileDialogVisible"
       width="40%"
@@ -179,10 +181,11 @@
       ok-text="确定"
       cancel-text="取消"
       :mask-closable="false"
-      @ok="mkdir()"
+      @ok="mkdir(mkdir_input)"
     >
       <p>文件夹会建立在当前目录下</p>
       <a-input
+        v-model="mkdir_input"
         class="mkdir_input"
         placeholder="输入文件夹名称"
       />
@@ -208,7 +211,7 @@
       </a-table>
     </a-modal>
 
-<!--    <a-modal
+    <!--    <a-modal
       v-model="shareFileDialogVisible"
       title="分享文件"
       ok-text="确定"
@@ -289,7 +292,9 @@ export default {
       deleteResultList: [],
       filesList: [],
       skeleton_loading: false,
-      selectedRowKeys: []
+      selectedRowKeys: [],
+      mkdir_input: '文件夹',
+      currentPath: '/'
     }
   },
   watch: {
@@ -355,15 +360,16 @@ export default {
       })
     },
     // 创建文件夹
-    mkdir() {
+    mkdir(mkdir_input) {
+      this.$message.error(mkdir_input)
       const param = {
-        name: this.dirName + '/',
+        name: mkdir_input + '/',
         path: this.currentPath
       }
       makeDir(param).then(res => {
         if (res.code === 200) {
           this.$message.success(res.msg)
-          this.dirName = ''
+          this.mkdir_input = ''
           this.mkdirDialogVisible = false
         } else {
           this.$message.error(res.msg)
@@ -389,7 +395,23 @@ export default {
         taget.push(temp)
       }
       if (skip) {
-        this.$message.error('删除文件夹下所有内容正在开发中...')
+        // this.$message.error('删除文件夹下所有内容正在开发中...')
+        this.$confirm('删除将导致目录下所有文件被删除,是否继续？', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.deleteFile_fun(taget)
+          this.$message({
+            type: 'success',
+            message: '删除成功!'
+          })
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          })
+        })
         // this.$confirm({
         //   title: '你选择了文件夹，确定删除吗？',
         //   content: '删除将导致目录下所有文件被删除。',
@@ -397,7 +419,7 @@ export default {
         //   okType: 'danger',
         //   cancelText: '取消',
         //   onOk() {
-        //     _this.deleteFile_fun(taget)
+        //     this.deleteFile_fun(taget)
         //     return
         //   },
         //   onCancel() {
@@ -548,7 +570,7 @@ export default {
         case 'java':
           return 'code'
         case 'class':
-          return 'file-project'
+          return 'code'
         case 'sql':
           return 'code'
         case 'vue':
@@ -593,10 +615,10 @@ export default {
       }
       uploadFiles(param).then(res => {
         if (res.code === 200) {
-          this.$message.success('上传成功了哦！')
+          // this.$message.success('上传成功了哦！')
           this.getFileList()
         } else {
-          this.$message.error('艹!失败了')
+          // this.$message.error('艹!失败了')
         }
       })
     },
