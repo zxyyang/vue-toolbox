@@ -361,7 +361,6 @@ export default {
     },
     // 创建文件夹
     mkdir(mkdir_input) {
-      this.$message.error(mkdir_input)
       const param = {
         name: mkdir_input + '/',
         path: this.currentPath

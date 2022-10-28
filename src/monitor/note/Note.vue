@@ -92,6 +92,7 @@
           :scroll-style="true"
           :ishljs="true"
           :toolbars="toolbars"
+          :code-style="'github-dark-dimmed'"
           style="height: 96% ;width: 98%;  "
         >
           <template #right-toolbar-after>

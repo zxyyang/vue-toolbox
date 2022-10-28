@@ -24,6 +24,7 @@
       :toolbars="toolbars"
       style="height: 730px"
       :ishljs="true"
+      :code-style="'github-dark-dimmed'"
       @imgAdd="handleEditorImgAdd"
       @imgDel="handleEditorImgDel"
       @change="change"

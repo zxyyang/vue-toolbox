@@ -21,6 +21,7 @@
       ref="md"
       v-model="value"
       :toolbars="toolbars"
+      :code-style="'github-dark-dimmed'"
       style="height: 730px"
       @imgAdd="handleEditorImgAdd"
       @imgDel="handleEditorImgDel"
