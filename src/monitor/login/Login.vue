@@ -36,8 +36,8 @@
               </el-form-item>
 
               <div style="text-align:center; margin-top: 40px">
-                <el-button class="but1" style="margin-left: 100px;width: 100px" @click="onSubmit">LogIn</el-button>
-                <el-button style="margin-right: 100px;margin-left: 50px;width: 100px" @click="onTest">Test</el-button>
+                <el-button class="but1" style="width: 180px" @click="onSubmit">LogIn</el-button>
+<!--                <el-button style="margin-right: 100px;margin-left: 50px;width: 100px" @click="onTest">Test</el-button>-->
               </div>
             </el-form>
           </div>
@@ -76,27 +76,28 @@ export default {
 
   },
   methods: {
-    onTest() {
-      const param = {
-        userName: 'test',
-        password: 'test'
-      }
-      login(param).then(res => {
-        if (res.code === 200) {
-          sessionStorage.setItem('token', 'tokenContent')
-          sessionStorage.setItem('userName', 'zxyang')
-          this.$router.push('/index')
-        } else {
-          this.$message.error(res.msg)
-        }
-      })
-    },
+    // onTest() {
+    //   const param = {
+    //     userName: 'test',
+    //     password: 'test'
+    //   }
+    //   login(param).then(res => {
+    //     if (res.code === 200) {
+    //       sessionStorage.setItem('token', 'tokenContent')
+    //       sessionStorage.setItem('userName', 'zxyang')
+    //       this.$router.push('/index')
+    //     } else {
+    //       this.$message.error(res.msg)
+    //     }
+    //   })
+    // },
     onSubmit() {
       login(this.form).then(res => {
         if (res.code === 200) {
           // var token = this.$route.query.token// 从URL地址上得到token
           // 将数据放在当前组件的数据内
-          sessionStorage.setItem('token', 'tokenContent')
+          localStorage.setItem('userName', res.data.label)
+          localStorage.setItem('token', 'tokenContent')
           // sessionStorage.setItem('userName', this.form.userName)
           this.$router.push('/index')
         } else {

@@ -73,7 +73,7 @@ export default {
   name: 'Header',
   data() {
     return {
-      userName: sessionStorage.getItem('userName'),
+      userName: localStorage.getItem('userName'),
       showLogIn: true,
       showLogOut: false,
       isMobile: false
@@ -81,7 +81,7 @@ export default {
     }
   },
   created() {
-    if (window.sessionStorage.getItem('token')) {
+    if (window.localStorage.getItem('token')) {
       this.showLogOut = true
       this.showLogIn = false
     } else {
@@ -125,7 +125,7 @@ export default {
       this.showLogIn = true
       this.showLogOut = false
       // 清理token
-      window.sessionStorage.clear()
+      window.localStorage.clear()
       this.$router.push('/index')
       this.userName = ''
     },

@@ -31,7 +31,7 @@ const errorHandler = (error, vm) => {
 Vue.config.errorHandler = errorHandler
 Vue.prototype.$throw = (error) => errorHandler(error, this)
 router.beforeEach((to, from, next) => {
-  const token = window.sessionStorage.getItem('token')// 取出token
+  const token = window.localStorage.getItem('token')// 取出token
   // 用to的地址来匹配白名单
   for (let i = 0; i < whites.length; i++) {
     if (to.fullPath === whites[i]) {
