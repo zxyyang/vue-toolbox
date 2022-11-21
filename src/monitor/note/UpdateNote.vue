@@ -9,7 +9,7 @@
       <template slot="extra">
         <a-input v-model="noteName" placeholder="Name" style="width: 200px" />
         <a-input v-model="noteRemark" placeholder="Remark" style="width: 200px" />
-        <a-input v-model="noteType" placeholder="Type" style="width: 120px" />
+<!--        <a-input v-model="noteType" placeholder="Type" style="width: 120px" />-->
       </template>
       <template slot="extra">
 
@@ -43,7 +43,7 @@ export default {
       id: '',
       noteName: '',
       noteRemark: '',
-      noteType: '',
+      // noteType: '',
       isDataOk: false,
       toolbars: {
         bold: true, // 粗体
@@ -96,7 +96,7 @@ export default {
       this.value = ras.noteContent
       this.noteName = ras.noteName
       this.noteRemark = ras.noteRemark
-      this.noteType = ras.noteType
+      // this.noteType = ras.noteType
       this.isDataOk = true
     })
   },
@@ -109,7 +109,7 @@ export default {
         id: this.id,
         noteName: this.noteName,
         noteRemark: this.noteRemark,
-        noteType: this.noteType,
+        // noteType: this.noteType,
         noteContent: this.value
       }
       console.log('变量数据：' + param)
