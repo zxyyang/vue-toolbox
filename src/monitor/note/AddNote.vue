@@ -9,7 +9,6 @@
       <template slot="extra">
         <a-input v-model="noteName" placeholder="Name" style="width: 200px" />
         <a-input v-model="noteRemark" placeholder="Remark" style="width: 200px" />
-        <a-input v-model="noteType" placeholder="Type" style="width: 120px" />
       </template>
       <template slot="extra">
         <a-button @click="addNote">
@@ -38,7 +37,6 @@ export default {
   data() {
     return {
       noteName: '',
-      noteType: '',
       noteRemark: '',
       toolbars: {
         bold: true, // 粗体
@@ -83,7 +81,6 @@ export default {
       const param = {
         noteName: this.noteName,
         noteRemark: this.noteRemark,
-        noteType: this.noteType,
         noteContent: this.value
       }
 

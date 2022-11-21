@@ -39,13 +39,6 @@
           prop="noteRemark"
           label="备注"
         />
-
-        <el-table-column
-          prop="noteType"
-          label="类型"
-          width="250"
-          align="center"
-        />
         <el-table-column
           sortable
           prop="noteTime"
